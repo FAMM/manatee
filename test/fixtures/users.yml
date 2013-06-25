@@ -3,11 +3,11 @@
 one:
   name: admin
   email: admin@example.com
-  encrypted_password: $2a$10$8VBKEkHovFGPbsVYP8W94uaQdQ6621KBWx.4mSHZ1QJW...
+  encrypted_password: $2a$10$30VTPDtdhTAzfZ1A8C/UjOPPdk.2ibZ/8CX.LBsYys6ln4hleIo1G
   admin: true
 
 two:
   name: user
   email: user@example.com
-  encrypted_password: $2a$10$JQ0GEuyEuRulWHX6I1YyMuxYxIQmGeqnHC.fgV4GIc1S...
+  encrypted_password: $2a$10$30VTPDtdhTAzfZ1A8C/UjOPPdk.2ibZ/8CX.LBsYys6ln4hleIo1G
   admin: false
