@@ -1,4 +1,6 @@
 Manatee::Application.routes.draw do
+  resources :categories
+
   resources :transactions
 
   # The priority is based upon order of creation: first created -> highest priority.
