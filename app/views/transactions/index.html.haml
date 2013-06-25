@@ -1,0 +1,25 @@
+%h1= t(".heading")
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th
+        = t("activerecord.attributes.transaction.comment")
+      %th
+        = t("activerecord.attributes.transaction.ammount")
+      %th
+        = t("activerecord.attributes.common.created_at")
+
+
+  %tbody
+    -@transactions.each do |transaction|
+      %tr
+        %td
+          =transaction.comment
+        %td
+          =transaction.amount
+        %td
+          =transaction.creatd_at
+
+%p
+  =link_to "new", new_transaction_path

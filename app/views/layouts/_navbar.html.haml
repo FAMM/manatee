@@ -1,0 +1,17 @@
+.navbar.navbar-inverse.navbar-fixed-top
+  .navbar-inner
+    .container
+
+      %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.brand{:href => root_url}
+        Manatee
+      .container.nav-collapse
+
+
+        %ul.nav
+          %li{:class => (controller.controller_name=="welcome") ? "active":nil}
+            %a{:style => "font-weight:normal", :href => root_path}
+              %i.icon-home.icon-white

@@ -1,0 +1,45 @@
+!!! 5
+%html
+  %head
+    %meta{:charset => "utf-8"}
+    %meta{:name => "viewport", :content=> "width=device-width, initial-scale=1.0"}
+
+    = stylesheet_link_tag "application"
+    = csrf_meta_tags
+    = javascript_include_tag "application"
+
+
+  %body
+
+    #wrap
+      %nav
+        %div= render :partial => "layouts/navbar"
+
+      .container{:style => "padding-top: 60px"}
+        - if flash[:notice] or flash[:error] or flash[:alert]
+          .row
+            .span12
+              %button{:type=>"button",:class=>"close","data-dismiss"=>"alert"}
+                &times;
+              -if flash[:notice]
+                .alert.alert-success
+                  =flash[:notice]
+
+              -if flash[:error]
+                .alert.alert-error
+                  =flash[:error]
+
+              - if flash[:alert]
+                .alert.alert-notice
+                  =flash[:alert]
+
+        = yield
+
+
+
+        #push
+    %footer
+      .container
+        =render :partial => "layouts/footer"
+
+
