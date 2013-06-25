@@ -16,6 +16,7 @@ $gridColumnWidth: 70px !default;
 $gridGutterWidth: 30px !default;
 $gridRowWidth: (12 * $gridColumnWidth) + ($gridGutterWidth * 11) !default;
 @import 'bootstrap';
+@import "bootstrap-responsive";
 
 
 html,body  {
