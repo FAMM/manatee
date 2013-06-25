@@ -1,5 +1,5 @@
 - unless current_user
-  %h1= t('.unknown_welcome')
+  %h1= t('.welcome_unknown')
   %p= t('.description_unknown')
 - else
   %h1= t('.welcome_user', user: current_user.name)
