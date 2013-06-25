@@ -1,0 +1,25 @@
+en:
+  activerecord:
+    models:
+      user: "User"
+      category: "Category"
+      transaction: "Transaction"
+    attributes:
+      user:
+        name: "Name"
+        email: "Email"
+        admin: "Administrator"
+      category:
+        name: "Name"
+        budget: "Budget"
+      transaction:
+        comment: "Comment"
+        amount: "Amount"
+        saldo: "Saldo"
+      common:
+        id: "ID"
+        updated_at: "updated at"
+        created_at: "created at"
+
+
+
