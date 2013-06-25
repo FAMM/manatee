@@ -1,11 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  name: MyString
-  email: MyString
-  admin: false
+  name: admin
+  email: admin@example.com
+  encrypted_password: $2a$10$8VBKEkHovFGPbsVYP8W94uaQdQ6621KBWx.4mSHZ1QJW...
+  admin: true
 
 two:
-  name: MyString
-  email: MyString
+  name: user
+  email: user@example.com
+  encrypted_password: $2a$10$JQ0GEuyEuRulWHX6I1YyMuxYxIQmGeqnHC.fgV4GIc1S...
   admin: false
