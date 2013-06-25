@@ -19,18 +19,22 @@
         - if flash[:notice] or flash[:error] or flash[:alert]
           .row
             .span12
-              %button{:type=>"button",:class=>"close","data-dismiss"=>"alert"}
-                &times;
               -if flash[:notice]
                 .alert.alert-success
+                  %button{:type=>"button",:class=>"close","data-dismiss"=>"alert"}
+                    &times;
                   =flash[:notice]
 
               -if flash[:error]
                 .alert.alert-error
+                  %button{:type=>"button",:class=>"close","data-dismiss"=>"alert"}
+                    &times;
                   =flash[:error]
 
               - if flash[:alert]
                 .alert.alert-notice
+                  %button{:type=>"button",:class=>"close","data-dismiss"=>"alert"}
+                    &times;
                   =flash[:alert]
 
         = yield
