@@ -9,4 +9,15 @@ class User < ActiveRecord::Base
   has_many :transactions
 
   LANGUAGES=%w(en de sv)
+
+	def saldo date=nil
+					if date
+									# get the saldo of the latest transaction on a certain day
+									first_transaction = self.transactions.where(date: date).order("date DESC").first
+									return first_transaction.saldo + first_transaction.amount
+					else
+									# return the saldo of the very last transaction
+									return self.transactions.order("date DESC").first.saldo
+					end
+	end
 end
