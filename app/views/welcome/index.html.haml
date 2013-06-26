@@ -14,7 +14,7 @@
             %th= t('.comment')
             %th= t('.amount')
             %th= t('.saldo')
-          - @transaction.each do |transaction|
+          - @transactions.each do |transaction|
             %tr
               %td= transaction.comment
               %td= color_currency( transaction.amount )
