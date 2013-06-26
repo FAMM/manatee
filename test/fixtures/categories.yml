@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  name: MyString
-  budget: 9.99
+  name: Food
+  budget: -500.00
 
 two:
-  name: MyString
-  budget: 9.99
+  name: Income
+  budget: 500.00
