@@ -8,5 +8,5 @@ class User < ActiveRecord::Base
   has_many :categories
   has_many :transactions
 
-  LANGUAGES=%w(en de sv)
+  LANGUAGES={"English" => "en", "Deutsch" => "de", "Svenska" => "se"}
 end
