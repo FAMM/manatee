@@ -15,3 +15,19 @@
           %li{:class => (controller.controller_name=="welcome") ? "active":nil}
             %a{:style => "font-weight:normal", :href => root_path}
               %i.icon-home.icon-white
+
+        -if current_user
+          %ul.nav.pull-right
+            %li.dropdown
+              =link_to "#", :class => "dropdown-toggle", "data-toggle"=>"dropdown" do
+                =current_user.name
+                %b.caret
+              %ul.dropdown-menu
+                %li
+                  =link_to "Account", edit_user_registration_path
+                %li
+                  =link_to "Logout", destroy_user_session_path, :method => :delete
+        -else
+          %ul.nav.pull-right
+            %li
+              =link_to "Login", new_user_session_path

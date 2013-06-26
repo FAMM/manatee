@@ -36,9 +36,9 @@
                   %button{:type=>"button",:class=>"close","data-dismiss"=>"alert"}
                     &times;
                   =flash[:alert]
-
-        = yield
-
+        .row
+          .span12
+            = yield
 
 
         #push

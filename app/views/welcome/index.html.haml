@@ -6,14 +6,19 @@
 
   %p
     %h2= t('.last_n_transactions', n: 10)
-    
-    %table.table.table-striped
-      %tr
-        %th= t('.comment')
-        %th= t('.amount')
-        %th= t('.saldo')
-      - @transaction.each do |transaction|
-        %tr
-          %td= transaction.comment
-          %td= color_currency( transaction.amount )
-          %td= color_currency( transaction.saldo )
+
+    .row
+      .span9
+        %table.table.table-striped
+          %tr
+            %th= t('.comment')
+            %th= t('.amount')
+            %th= t('.saldo')
+          - @transaction.each do |transaction|
+            %tr
+              %td= transaction.comment
+              %td= color_currency( transaction.amount )
+              %td= color_currency( transaction.saldo )
+
+      .span3
+        =render :partial => 'categories/overview'
