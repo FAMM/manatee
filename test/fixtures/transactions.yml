@@ -1,11 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  amount: 9.99
-  comment: MyString
-  saldo: 9.99
+  amount: 500.00
+  comment: Salery
+  category_id: 2
+  saldo: 500.00
 
 two:
-  amount: 9.99
-  comment: MyString
-  saldo: 9.99
+  amount: -400.00
+  comment: Shopping Food
+  category_id: 1
+  saldo: 100
