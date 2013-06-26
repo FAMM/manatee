@@ -12,12 +12,10 @@ class User < ActiveRecord::Base
 
 	def saldo date=nil
 					if date
-									# get the saldo of the latest transaction on a certain day
-									first_transaction = self.transactions.where(date: date).order("date DESC").first
-									return first_transaction.saldo + first_transaction.amount
+									return 0
 					else
 									# return the saldo of the very last transaction
-									return self.transactions.order("date DESC").first.saldo
+									return 0
 					end
 	end
 end
