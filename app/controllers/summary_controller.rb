@@ -1,4 +1,6 @@
 class SummaryController < ApplicationController
+  before_filter :authenticate_user!
+
   def index
 					@categories = current_user.categories
 					@saldo  = 0.0
