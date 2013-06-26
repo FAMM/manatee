@@ -1,9 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
+  id: 1
   name: Food
   budget: -500.00
+  user_id: 1
 
 two:
+  id: 2
   name: Income
   budget: 500.00
+  user_id: 1
