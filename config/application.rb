@@ -21,5 +21,12 @@ module Manatee
     # config.i18n.default_locale = :de
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
 		config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
+
+    config.to_prepare do
+      Devise::SessionsController.layout "devise"
+      Devise::RegistrationsController.layout "application"
+      Devise::ConfirmationsController.layout "devise"
+      Devise::PasswordsController.layout "devise"
+    end
   end
 end

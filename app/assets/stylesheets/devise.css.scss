@@ -9,48 +9,29 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_directory ./application
+ *= require_directory ./devise
  */
 
 $gridColumnWidth: 70px !default;
 $gridGutterWidth: 30px !default;
 $gridRowWidth: (12 * $gridColumnWidth) + ($gridGutterWidth * 11) !default;
-$navbarBackgroundHighlight: #E2E2E2;
-$navbarBackground: #D2D2D2;
 @import 'bootstrap';
 @import "bootstrap-responsive";
 
-
-html,body  {
-  height:100%;
+body{
   background-color: $grayLighter;
 }
 
+.box{
+  width: 400px;
+  position: relative;
+  @include border-radius(5px);
+  @include box-shadow(5px 5px 5px $grayLight);
+  margin: auto;
+  padding: 20px;
+  background: white;
 
-#wrap {
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
-  margin: 0 auto -35px;
 }
 
-#push {
-  height: 35px;
-}
 
-footer  {
-  height: 35px;
-  background-color: $grayLighter;
-  p {
-    border-top: 1px solid #DDDDDD;
-  }
-}
 
-@media (max-width: 767px) {
-  footer {
-    margin-left: -20px;
-    margin-right: -20px;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-}

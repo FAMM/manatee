@@ -1,24 +1,35 @@
 - unless current_user
-  %h1= t('.welcome_unknown')
-  %p= t('.description_unknown')
-- else
-  %h1= t('.welcome_user', user: current_user.name)
+  .hero-unit
+    %h1= t('.welcome_unknown')
+    %p= t('.description_unknown')
+    %p
+      =form_for "user", :url => user_session_path, :html => {:class => "form-inline"} do |f|
+        =f.text_field :login, :class => "input-small", :placeholder => t("devise.sessions.placeholder_login")
+        =f.password_field :password, :class => "input-small", :placeholder => t("devise.sessions.placeholder_password")
+        %label.checkbox
+          =f.check_box :remember_me
+          Remember me
+        =f.submit t("devise.sessions.sign_in_button"), :class => "btn"
 
-  %p
-    %h2= t('.last_n_transactions', n: 10)
 
-    .row
-      .span9
-        %table.table.table-striped
+-else
+  .row
+    .span9
+      .page-header
+        %h1 Dashboard
+
+
+      %h3= t('.last_n_transactions', n: 10)
+      %table.table.table-striped
+        %tr
+          %th= t('.comment')
+          %th= t('.amount')
+          %th= t('.saldo')
+        - @transactions.each do |transaction|
           %tr
-            %th= t('.comment')
-            %th= t('.amount')
-            %th= t('.saldo')
-          - @transactions.each do |transaction|
-            %tr
-              %td= transaction.comment
-              %td= color_currency( transaction.amount )
-              %td= color_currency( transaction.saldo )
+            %td= transaction.comment
+            %td= color_currency( transaction.amount )
+            %td= color_currency( transaction.saldo )
 
-      .span3
-        =render :partial => 'categories/overview'
+    .span3
+      =render :partial => 'categories/overview'

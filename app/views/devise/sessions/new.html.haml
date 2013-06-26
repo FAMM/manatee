@@ -19,7 +19,7 @@
         .controls
           =f.check_box :remember_me
 
-    .form-actions
-      %p
-        = f.submit t("devise.sessions.sign_in_button"), :class => "btn btn-primary"
-      = render "devise/shared/links"
+    .control-group
+      .controls
+        =f.submit t("devise.sessions.sign_in_button"), :class => "btn btn-primary btn-large"
+    %p= render "devise/shared/links"
