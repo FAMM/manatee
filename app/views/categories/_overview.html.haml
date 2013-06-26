@@ -1,0 +1,13 @@
+%table.table.table-condensed
+  %tr
+    %td= t('.old_saldo')
+    %td= @old_saldo
+
+  - @categories.each do |category|
+    %tr
+      %td= category.name
+      %td= color_currency category.budget
+
+  %tr
+    %td= t('.saldo')
+    %td= @saldo
