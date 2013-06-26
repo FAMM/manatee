@@ -54,3 +54,28 @@ footer  {
     padding-right: 20px;
   }
 }
+
+.currency {
+	text-align: right;
+}
+td.currency {
+	width: 125px;
+	text-align: right;
+}
+td.date {
+	width: 125px;
+	text-align: right;
+}
+th.currency {
+	width: 125px;
+	text-align: right;
+}
+th.date {
+	width: 125px;
+	text-align: right;
+}
+.helptext {
+	color: $grayLight;
+	font-size: small;
+	text-align: center;
+}

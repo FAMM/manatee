@@ -23,3 +23,11 @@ three:
   date: 2013-06-10
   category_id: 1
   user_id: 1
+
+four:
+  amount: -50.00
+  comment: Shopping Food
+  saldo: 50
+  date: 2013-06-10
+  category_id: 1
+  user_id: 1

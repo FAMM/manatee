@@ -1,0 +1,33 @@
+%h1= t('.heading')
+
+.header_container
+  %table
+    %tr.info
+      %td &nbsp;
+      %td.header.currency= t('common.planed')
+      %td.header.currency= t('common.used')
+
+- @categories.each do |category|
+  .category_container{ :id => category.name, 'data-toggle' => 'collapse', 'data-target' => "##{category.name}_collapse" }
+    %table.table
+      %tr
+        %td= category.name
+        %td.currency= formated_currency category.budget
+        %td.currency= formated_currency category.budget_used
+    .transactions_container.collapse{ id: "#{category.name}_collapse" }
+      %table.table.table-condensed.table-striped
+        - old_date = nil
+        - category.transactions.this_month.order("date ASC").each do |transaction|
+          %tr
+            %td.date= l transaction.date, format: :long  unless transaction.date == old_date # print out the date only if the old_date is different
+            %td= transaction.comment
+            %td.currency= formated_currency transaction.amount
+          - old_date = transaction.date # set the old date
+
+.saldo_container
+  %table.table
+    %tr.info
+      %td= t('common.saldo')
+      %td.currency= formated_currency @saldo
+        
+%p.helptext= t('.helptext')

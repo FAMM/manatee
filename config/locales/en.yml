@@ -1,6 +1,11 @@
 en:
   entities:
     new: "New %{entity}"
+  common:
+    saldo: "Saldo"
+    sum: "Sum"
+    planned: "Target"
+    used: "Actual"
   date:
     abbr_day_names:
     - Sun

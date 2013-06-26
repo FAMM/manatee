@@ -10,7 +10,6 @@
         Manatee
       .container.nav-collapse
 
-
         %ul.nav
           %li{:class => (controller.controller_name=="welcome") ? "active":nil}
             %a{:style => "font-weight:normal", :href => root_path}
@@ -21,6 +20,10 @@
 
         -if current_user
           %ul.nav.pull-right
+            %li.navbar-text
+              = t('common.saldo')
+              = number_to_currency current_user.saldo
+            %li.divider-vertical
             %li.dropdown
               =link_to "#", :class => "dropdown-toggle", "data-toggle"=>"dropdown" do
                 =current_user.name
@@ -30,12 +33,6 @@
                   =link_to "Account", edit_user_registration_path
                 %li
                   =link_to "Logout", destroy_user_session_path, :method => :delete
-          %ul.nav.pull-right
-            %li
-              = t('common.saldo')
-              = number_to_currency current_user.saldo
-            //spacer
-            %li &nbsp;
         -else
           %ul.nav.pull-right
             %li

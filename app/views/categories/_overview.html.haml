@@ -2,15 +2,15 @@
   %table.table.table-condensed
     %tr
       %th= t('activerecord.models.category')
-      %th= t('.planned')
-      %th= t('.used')
+      %th.currency= t('common.planned')
+      %th.currency= t('common.used')
     - @categories.each do |category|
       %tr
         %td= category.name
-        %td= number_to_currency category.budget
-        %td= number_to_currency category.budget_used
+        %td.currency= number_to_currency category.budget
+        %td.currency= number_to_currency category.budget_used
 
-    %tr
-      %td= t('.sum')
-      %td= number_to_currency @sum_budget
-      %td= number_to_currency @sum_budget_used
+    %tr.info
+      %td= t('common.sum')
+      %td.currency= number_to_currency @sum_budget
+      %td.currency= number_to_currency @sum_budget_used

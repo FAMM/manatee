@@ -1,0 +1,5 @@
+en:
+  summary:
+    index:
+      heading: "Your transactions for the current month"
+      helptext: "Click on a category to see the transactions in it."

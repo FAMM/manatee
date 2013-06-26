@@ -1,0 +1,23 @@
+// Place all the styles related to the Summary controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.header_container > table {
+	width: 100%;
+	& td {
+		padding-left: 8px;
+		padding-right: 8px;
+	}
+	& td.header {
+		font-weight: bold;
+	}
+}
+.category_container > table {
+	font-weight: bold;
+}
+.saldo_container {
+	font-weight: bold;
+}
+.transactions_container {
+	padding-left: 100px;
+}

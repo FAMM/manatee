@@ -11,13 +11,13 @@
         %table.table.table-striped
           %tr
             %th= t('.comment')
-            %th= t('.amount')
-            %th= t('.saldo')
+            %th.currency= t('.amount')
+            %th.currency= t('.saldo')
           - @transactions.each do |transaction|
             %tr
               %td= transaction.comment
-              %td= color_currency( transaction.amount )
-              %td= color_currency( transaction.saldo )
+              %td.currency= formated_currency( transaction.amount )
+              %td.currency= formated_currency( transaction.saldo )
 
-  .span3
+  .span3.hidden-phone
     =render :partial => 'categories/overview'
