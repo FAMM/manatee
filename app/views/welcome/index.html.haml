@@ -17,8 +17,8 @@
           - @transactions.each do |transaction|
             %tr
               %td= transaction.comment
-              %td= color_currency( transaction.amount )
-              %td= color_currency( transaction.saldo )
+              %td= number_to_currency transaction.amount
+              %td= number_to_currency transaction.saldo
 
-      .span3
+      .span3.hidden-phone
         =render :partial => 'categories/overview'

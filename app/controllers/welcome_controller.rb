@@ -6,8 +6,17 @@ class WelcomeController < ApplicationController
 			
 			# fetch the categories for the sidebar
 			@categories = current_user.categories
-			@saldo = current_user.saldo
-			@old_saldo = current_user.saldo( Date.today.beginning_of_month - 1.day )
+			
+			@sum_budget = 0.0
+			@sum_budget_used = 0.0
+			@categories.each do |category|
+				category.budget_used = 0.0
+				category.transactions.where( date: Date.today.beginning_of_month..Date.today.end_of_month ).each do |transaction|
+					 category.budget_used += transaction.amount
+				end
+				@sum_budget += category.budget
+				@sum_budget_used += category.budget_used
+			end
 		end
   end
 end
