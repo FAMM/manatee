@@ -5,7 +5,7 @@
     = render partial: 'summary/filters'
 
   .span8
-    %table.summary.table
+    %table.summary.table.treeview
       %thead
         %tr.header
           %th.empty &nbsp;
@@ -15,7 +15,7 @@
       %tbody
         - @categories.each do |category|
           / category
-          %tr.category_container.expandable{ 'data-target' => "tr.date_#{category.name}", 'data-expanded' => false }
+          %tr.treeview-container{ 'id' => "#{category.name}_container", 'data-tv-expanded' => 0, 'data-tv-level' => 0 }
             %td.fill= category.name
             %td.currency= formated_currency category.budget
             %td.currency= formated_currency category.budget_used
@@ -26,13 +26,13 @@
 
             / date
             - unless transaction.date == old_date # print out the date only if the old_date is different
-              %tr.date_container.expandable{ 'class' => "date_#{category.name}", 'data-target' => "tr.transaction_#{transaction.date}", 'data-expanded' => false }
+              %tr.treeview-container{ 'id' => "#{transaction.date}_#{category.name}_container", 'data-tv-expanded' => 0, 'data-tv-parent' => "##{category.name}_container", 'data-tv-level' => 1 }
                 %td.fill= l transaction.date, format: :long
                 %td.empty &nbsp;
                 %td.empty &nbsp;
 
             / transaction
-            %tr.transaction_container{ 'class' => "transaction_#{transaction.date}", 'data-expanded' => false }
+            %tr.treeview-item{ 'data-tv-parent' => "##{transaction.date}_#{category.name}_container", 'data-tv-level' => 2 }
               %td.fill= transaction.comment
               %td.empty &nbsp;
               %td.currency= formated_currency transaction.amount
