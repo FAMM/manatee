@@ -15,8 +15,8 @@
       %nav
         %div= render :partial => "layouts/navbar"
 
-      .container.main-container{:style => "padding-top:60px"}
-        .main-content{:style => "margin-top: 20px;padding-top:10px"}
+      .container.main-container
+        .main-content
           - if flash[:notice] or flash[:error] or flash[:alert]
             .row
               .span12

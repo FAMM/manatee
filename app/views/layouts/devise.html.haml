@@ -10,30 +10,30 @@
 
 
   %body
-    .container{:style => "padding-top: 60px"}
-      - if flash[:notice] or flash[:error] or flash[:alert]
-        .row
-          .span12
-            -if flash[:notice]
-              .alert.alert-success
-                %button{:type=>"button",:class=>"close","data-dismiss"=>"alert"}
-                  &times;
-                =flash[:notice]
-
-            -if flash[:error]
-              .alert.alert-error
-                %button{:type=>"button",:class=>"close","data-dismiss"=>"alert"}
-                  &times;
-                =flash[:error]
-
-            - if flash[:alert]
-              .alert.alert-notice
-                %button{:type=>"button",:class=>"close","data-dismiss"=>"alert"}
-                  &times;
-                =flash[:alert]
+    .container
 
       .box
         %h1.text-center Manatee
+        - if flash[:notice] or flash[:error] or flash[:alert]
+          .row
+            .span5
+              -if flash[:notice]
+                .alert.alert-success
+                  %button{:type=>"button",:class=>"close","data-dismiss"=>"alert"}
+                    &times;
+                  =flash[:notice]
+
+              -if flash[:error]
+                .alert.alert-error
+                  %button{:type=>"button",:class=>"close","data-dismiss"=>"alert"}
+                    &times;
+                  =flash[:error]
+
+              - if flash[:alert]
+                .alert.alert-notice
+                  %button{:type=>"button",:class=>"close","data-dismiss"=>"alert"}
+                    &times;
+                  =flash[:alert]
         = yield
 
 

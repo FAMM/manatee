@@ -22,15 +22,24 @@ body{
   background-color: $grayLighter;
 }
 
+.container {
+  padding-top: 60px;
+}
+
 .box{
-  width: 400px;
+  max-width: 480px;
   position: relative;
   @include border-radius(5px);
   @include box-shadow(5px 5px 5px $grayLight);
   margin: auto;
   padding: 20px;
   background: white;
+}
 
+@media (max-width: 767px) {
+  .container {
+    padding-top: 10px;
+  }
 }
 
 
