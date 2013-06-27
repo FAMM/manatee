@@ -23,12 +23,7 @@ class User < ActiveRecord::Base
     end
   end
 	
-	def saldo date=nil
-    if date
-		  return 0
-		else
-	  	# return the saldo of the very last transaction
-			return 0
-		end
+	def saldo
+		0
 	end
 end

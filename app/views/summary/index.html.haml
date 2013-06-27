@@ -1,33 +1,46 @@
 %h1= t('.heading')
 
-.header_container
-  %table
-    %tr.info
-      %td &nbsp;
-      %td.header.currency= t('common.planed')
-      %td.header.currency= t('common.used')
+.row
+  .span4#filters
+    = render partial: 'summary/filters'
 
-- @categories.each do |category|
-  .category_container{ :id => category.name, 'data-toggle' => 'collapse', 'data-target' => "##{category.name}_collapse" }
-    %table.table
-      %tr
-        %td= category.name
-        %td.currency= formated_currency category.budget
-        %td.currency= formated_currency category.budget_used
-    .transactions_container.collapse{ id: "#{category.name}_collapse" }
-      %table.table.table-condensed.table-striped
-        - old_date = nil
-        - category.transactions.this_month.order("date ASC").each do |transaction|
-          %tr
-            %td.date= l transaction.date, format: :long  unless transaction.date == old_date # print out the date only if the old_date is different
-            %td= transaction.comment
-            %td.currency= formated_currency transaction.amount
-          - old_date = transaction.date # set the old date
+  .span8
+    %table.summary.table
+      %thead
+        %tr.header
+          %th.empty &nbsp;
+          %th.currency= t('common.planed')
+          %th.currency= t('common.used')
 
-.saldo_container
-  %table.table
-    %tr.info
-      %td= t('common.saldo')
-      %td.currency= formated_currency @saldo
-        
-%p.helptext= t('.helptext')
+      %tbody
+        - @categories.each do |category|
+          / category
+          %tr.category_container{ 'data-toggle' => 'collapse', 'data-target' => "tr.date_#{category.name}" }
+            %td.fill= category.name
+            %td.currency= formated_currency category.budget
+            %td.currency= formated_currency category.budget_used
+
+          / group by date
+          - old_date = nil
+          - category.transactions.this_month.order("date ASC").each do |transaction|
+
+            / date
+            - unless transaction.date == old_date # print out the date only if the old_date is different
+              %tr.date_container.collapse{ 'class' => "date_#{category.name}", 'data-toggle' => 'collapse', 'data-target' => "tr.transaction_#{transaction.date}" }
+                %td.fill= l transaction.date, format: :long
+                %td.empty &nbsp;
+                %td.empty &nbsp;
+
+            / transaction
+            %tr.transaction_container.collapse{ 'class' => "date_#{category.name} transaction_#{transaction.date}" }
+              %td.fill= transaction.comment
+              %td.empty &nbsp;
+              %td.currency= formated_currency transaction.amount
+            - old_date = transaction.date # set the old date
+
+        %tr.footer.info
+          %td.fill= t('common.sum')
+          %td.empty &nbsp;
+          %td.currency= formated_currency @saldo
+.row        
+  %p.helptext= t('.helptext')

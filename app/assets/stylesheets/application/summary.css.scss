@@ -2,22 +2,36 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.header_container > table {
-	width: 100%;
-	& td {
-		padding-left: 8px;
-		padding-right: 8px;
+table.summary {
+	& tr {
+		&.collapse {
+						overflow: hidden;
+		}
+		&.category_container {
+		}
+		&.date_container {
+			& td:first-child {
+				padding-left: 5%;
+			}
+		}
+		&.transaction_container {
+			& td:first-child {
+				padding-left: 10%;
+			}
+		}
+		& td,th {
+			&.empty {
+			}
+			&.fill {
+				max-width: 100%;
+			}
+			&.currency {
+				text-align: right;
+				width: 125px;
+			}
+			&.date {
+				width: 125px;
+			}
+		}
 	}
-	& td.header {
-		font-weight: bold;
-	}
-}
-.category_container > table {
-	font-weight: bold;
-}
-.saldo_container {
-	font-weight: bold;
-}
-.transactions_container {
-	padding-left: 100px;
 }
