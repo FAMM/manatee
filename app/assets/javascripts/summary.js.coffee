@@ -3,44 +3,49 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $().ready( () -> (
-	$.each( $("tr[data-toggle=collapse]"), () -> (
+	$.each( $("tbody > tr.expandable"), () -> (
+		setTreeView( $(this), 'hide' )
+	) )
+	$.each( $("tr[data-target]"), () -> (
 		element = $(this)
-		# hide everything
-		#hideTreePart( element )
 		# add the click callback
-		#element.click( () -> (
+		element.click( () -> (
 		#	toggleTreePart( element )
-		#) )
+			setTreeView( element, 'toggle', true )
+		) )
 	) )
 ) )
 
-showTreePart = ( element ) -> (
-	setTreePart( element, 'show' )
-)
+setTreeView = ( element, action, clicked=false ) -> (
+	$.each( $( element.data('target') ), () -> (
+		child = $(this)
+	
+		if action == 'toggle'
+			if element.data('expanded')
+				action = 'hide'
+			else
+				action = 'show'
 
-hideTreePart = ( element ) -> (
-	setTreePart( element, 'hide' )
-)
-
-toggleTreePart = ( element ) -> (
-	if element.data('collapsed')
-		action = 'hide'
-	else
-		action = 'show'
-
-	setTreePart( element, action )
-)
-
-setTreePart = ( element, action ) -> (
-	$.each( $( element.data( 'target' ) ), () -> (
+		if child.hasClass('expandable')
+			if action == 'show'
+				if child.data('expanded')
+					setTreeView( child, 'show' )
+				else
+					setTreeView( child, 'hide' )
+			else
+				setTreeView( child, 'hide' )
+		
 		if action == 'show'
-			$(this).show()
+			child.show('fast')		
 		else
-			$(this).hide()
+			child.hide('fast')
 	) )
 
-	if action == 'show'
-		element.data('collapsed', true)
-	else
-		element.data('collapsed', false)
+	# update the status of the container only if the user intentional clicked on the button
+	# not when we call setTreeView recursive...
+	if clicked
+		if action == 'show'
+			element.data( 'expanded', true )
+		else
+			element.data( 'expanded', false )
 )

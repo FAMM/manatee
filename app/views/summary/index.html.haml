@@ -15,7 +15,7 @@
       %tbody
         - @categories.each do |category|
           / category
-          %tr.category_container{ 'data-toggle' => 'collapse', 'data-target' => "tr.date_#{category.name}" }
+          %tr.category_container.expandable{ 'data-target' => "tr.date_#{category.name}", 'data-expanded' => false }
             %td.fill= category.name
             %td.currency= formated_currency category.budget
             %td.currency= formated_currency category.budget_used
@@ -26,13 +26,13 @@
 
             / date
             - unless transaction.date == old_date # print out the date only if the old_date is different
-              %tr.date_container.collapse{ 'class' => "date_#{category.name}", 'data-toggle' => 'collapse', 'data-target' => "tr.transaction_#{transaction.date}" }
+              %tr.date_container.expandable{ 'class' => "date_#{category.name}", 'data-target' => "tr.transaction_#{transaction.date}", 'data-expanded' => false }
                 %td.fill= l transaction.date, format: :long
                 %td.empty &nbsp;
                 %td.empty &nbsp;
 
             / transaction
-            %tr.transaction_container.collapse{ 'class' => "date_#{category.name} transaction_#{transaction.date}" }
+            %tr.transaction_container{ 'class' => "transaction_#{transaction.date}", 'data-expanded' => false }
               %td.fill= transaction.comment
               %td.empty &nbsp;
               %td.currency= formated_currency transaction.amount
