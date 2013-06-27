@@ -29,7 +29,7 @@
               %tr.treeview-container{ 'id' => "#{transaction.date}_#{category.name}_container", 'data-tv-expanded' => 0, 'data-tv-parent' => "##{category.name}_container", 'data-tv-level' => 1 }
                 %td.fill= l transaction.date, format: :long
                 %td.empty &nbsp;
-                %td.empty &nbsp;
+                %td.currency= formated_currency category.budget_used_by_date[transaction.date]
 
             / transaction
             %tr.treeview-item{ 'data-tv-parent' => "##{transaction.date}_#{category.name}_container", 'data-tv-level' => 2 }

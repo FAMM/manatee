@@ -1,3 +1,41 @@
 // Place all the styles related to the Summary controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+table.treeview {
+	& tr {
+		&.header {
+		}
+		&.footer {
+		}
+		&[data-tv-parent][data-tv-level="0"] {
+			& > td:first-child {
+			}
+		}
+		&[data-tv-parent][data-tv-level="1"] {
+			& > td:first-child {
+				padding-left: 5%;
+			}
+		}
+		&[data-tv-parent][data-tv-level="2"] {
+			& > td:first-child {
+				padding-left: 10%;
+			}
+		}
+		& td,th {
+			&.empty {
+			}
+			&.fill {
+				max-width: 100%;
+			}
+			&.currency {
+				text-align: right;
+				width: 125px;
+			}
+			&.date {
+				width: 125px;
+			}
+		}
+	}
+}
+

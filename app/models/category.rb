@@ -2,7 +2,7 @@ class Category < ActiveRecord::Base
 	belongs_to :user
 	has_many :transactions
 
-	attr_accessor :budget_used
+	attr_accessor :budget_used, :budget_used_by_date
 
 	def saldo
 		money_used = 0
