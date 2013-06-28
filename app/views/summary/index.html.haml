@@ -4,12 +4,19 @@
   .span12
     = render partial: 'summary/filters'
 
+.row.hidden-desktop
+  .span12
+    %a{ href: '#', onClick: "allTreeView('show'); return false" }= t('.expand_all')
+    |
+    %a{ href: '#', onClick: "allTreeView('hide'); return false" }= t('.collapse_all')
+    |
+    %a{ href: '#', onClick: "$('span.buttons').toggle(); return false" }= t('.toggle_buttons')
 .row
   .span12
     %table.summary.table.treeview
       %thead
         %tr.header
-          %td.fill
+          %td.fill.visible-desktop
             %a{ href: '#', onClick: "allTreeView('show'); return false" }= t('.expand_all')
             |
             %a{ href: '#', onClick: "allTreeView('hide'); return false" }= t('.collapse_all')
