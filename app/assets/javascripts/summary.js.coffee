@@ -21,14 +21,12 @@ $().ready( () -> (
 	) )
 
 	# allow the form container only to toggle when in phone mode
-	$( 'form.filter-form legend' ).first().click( () -> (
-		if window.responsive_design_awareness('phone')
-				$( $(this).data('target') ).toggle()
+	$( 'h3#filter-heading' ).first().click( () -> (
+		$( $(this).data('target') ).toggle()
 	) )
 
-	# make the filters collapsable if not in desktop mode
-	unless window.responsive_design_awareness('desktop')
-		$( $('form.filter-form legend').data('target') ).fadeOut()
+	# hide the filters by default
+	$( $('h3#filter-heading').data('target') ).fadeOut()
 ) )
 
 initializeFilterForm = ( element ) -> (
@@ -130,6 +128,7 @@ addFilterFormCondition = ( element ) -> (
 	$('div.conditions').first().data('count', ( number + 1 ) )
 
 	# add the stupid thing to the DOM tree
+	$('div.conditions').append( '<br>' )
 	$('div.conditions').append( condition )
 
 	# highlight it so the user will know it was added

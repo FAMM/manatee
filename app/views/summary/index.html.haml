@@ -1,10 +1,11 @@
 %h1= t('.heading')
 
 .row
-  .span5#filters
+  .span12
     = render partial: 'summary/filters'
 
-  .span7
+.row
+  .span12
     %table.summary.table.treeview
       %thead
         %tr.header
@@ -40,13 +41,14 @@
               %td.fill{ 'colspan' => 2}
                 = transaction.comment
                 %span.pull-right.buttons
-                  = button_to t('common.edit'), edit_transaction_path( transaction ), class: 'btn btn-mini'
-                  = button_to t('common.delete'), transaction, method: :delete, class: 'btn btn-mini btn-danger', data: { confirm: t('common.confirmation') }
+                  = button_to t('common.edit'), edit_transaction_path( transaction ), class: 'btn'
+                  = button_to t('common.delete'), transaction, method: :delete, class: 'btn btn-danger', data: { confirm: t('common.confirmation') }
               %td.currency= formated_currency transaction.amount
             - old_date = transaction.date # set the old date
 
         %tr.footer.info
           %td.fill{ 'colspan' => 2 }= t('common.sum')
           %td.currency= formated_currency @saldo
+
 .row        
   %p.helptext= t('.helptext')
