@@ -2,10 +2,13 @@ en:
   entities:
     new: "New %{entity}"
   common:
+    edit: "Edit"
+    delete: "Delete"
     saldo: "Saldo"
     sum: "Sum"
     planned: "Target"
     used: "Actual"
+    confirmation: "Are your sure?"
   date:
     abbr_day_names:
     - Sun

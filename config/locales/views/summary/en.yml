@@ -1,5 +1,15 @@
 en:
   summary:
+    filters:
+      start_date: "between"
+      end_date: "and"
+      add: "Add"
+      remove: "Remove"
+      apply: "Apply"
+      reset: "Reset filters"
     index:
-      heading: "Your transactions for the current month"
+      heading: "Your transactions"
       helptext: "Click on a category or date to see the transactions in it."
+      expand_all: "Expand all"
+      collapse_all: "Collapse all"
+      toggle_buttons: "Toggle buttons"

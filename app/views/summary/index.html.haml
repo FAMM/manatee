@@ -1,14 +1,19 @@
 %h1= t('.heading')
 
 .row
-  .span4#filters
+  .span5#filters
     = render partial: 'summary/filters'
 
-  .span8
+  .span7
     %table.summary.table.treeview
       %thead
         %tr.header
-          %th.empty &nbsp;
+          %td.fill
+            %a{ href: '#', onClick: "allTreeView('show'); return false" }= t('.expand_all')
+            |
+            %a{ href: '#', onClick: "allTreeView('hide'); return false" }= t('.collapse_all')
+            |
+            %a{ href: '#', onClick: "$('span.buttons').toggle(); return false" }= t('.toggle_buttons')
           %th.currency= t('common.planed')
           %th.currency= t('common.used')
 
@@ -27,20 +32,21 @@
             / date
             - unless transaction.date == old_date # print out the date only if the old_date is different
               %tr.treeview-container{ 'id' => "#{transaction.date}_#{category.name}_container", 'data-tv-expanded' => 0, 'data-tv-parent' => "##{category.name}_container", 'data-tv-level' => 1 }
-                %td.fill= l transaction.date, format: :long
-                %td.empty &nbsp;
+                %td.fill{ 'colspan' => 2  }= l transaction.date, format: :long
                 %td.currency= formated_currency category.budget_used_by_date[transaction.date]
 
             / transaction
             %tr.treeview-item{ 'data-tv-parent' => "##{transaction.date}_#{category.name}_container", 'data-tv-level' => 2 }
-              %td.fill= transaction.comment
-              %td.empty &nbsp;
+              %td.fill{ 'colspan' => 2}
+                = transaction.comment
+                %span.pull-right.buttons
+                  = button_to t('common.edit'), edit_transaction_path( transaction ), class: 'btn btn-mini'
+                  = button_to t('common.delete'), transaction, method: :delete, class: 'btn btn-mini btn-danger', data: { confirm: t('common.confirmation') }
               %td.currency= formated_currency transaction.amount
             - old_date = transaction.date # set the old date
 
         %tr.footer.info
-          %td.fill= t('common.sum')
-          %td.empty &nbsp;
+          %td.fill{ 'colspan' => 2 }= t('common.sum')
           %td.currency= formated_currency @saldo
 .row        
   %p.helptext= t('.helptext')

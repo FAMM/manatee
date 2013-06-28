@@ -1,1 +1,34 @@
-%p Filters
+=form_for @filter, url: summary_index_path, html: { class: 'form-inline filter-form' } do |f|
+  %fieldset
+    %legend{ 'data-target' => '#form-container' }= t('.filters')
+
+    #form-container
+      .date
+        .line
+          =f.label :start_date, t('.start_date')
+          =f.date_field :start_date
+
+        .line
+          =f.label :end_date, t('.end_date')
+          =f.date_field :end_date
+
+      .conditions{ 'data-count' => @filter.conditions.count }
+        .condition#condition-new
+          =hidden_field_tag "condition-new-hidden"
+          =select_tag "condition-new-connector", options_for_select( Filter::CONNECTORS.map{|c| [t(".#{c}"),c]} ), class: 'input-small'
+          =select_tag "condition-new-column", options_for_select( Filter::COLUMNS.keys.map{|c| [t("activerecord.attributes.transaction.#{c.to_s}"),c]} ), class: 'input-medium column'
+          - Filter::COLUMNS.each do |column, operators|
+            %div{ class: "#{column} condition-column" }
+              =select_tag "condition-new-#{column}-operator", options_for_select( operators.map{|o| [t(".#{o}"),o]} ), class: 'input-mini'
+              =text_field_tag "condition-new-#{column}-value", nil, class: 'input-mini'
+
+          =button_tag t('.add'), type: 'button', class: 'btn btn-info btn-medium', data: { 'remove' => t('.remove') }
+        
+        - i = 0
+        - @filter.conditions.each do |condition|
+          .condition{ :id => "condition-#{i}" }
+            asdf
+          - i += 1
+      .buttons
+        =f.submit t('.apply'), class: 'btn btn-primary'
+        =f.submit t('.reset'), class: 'btn', name: 'reset'
