@@ -13,7 +13,9 @@
     .container
 
       .box
-        %h1.text-center Manatee
+        %h1.text-center
+          =image_tag "manatee.png", :width => "200"
+          Manatee
         - if flash[:notice] or flash[:error] or flash[:alert]
           .row
             .span5
