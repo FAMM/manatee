@@ -27,7 +27,8 @@ html,body  {
 }
 
 .main-container {
-     padding-top:60px;
+  padding-top:60px;
+
   .main-content {
     margin-top:20px;
     padding-top:10px;
@@ -59,9 +60,9 @@ html,body  {
 footer  {
   height: 35px;
   background-color: $grayLighter;
-  p {
-    border-top: 1px solid #DDDDDD;
-  }
+  @include box-shadow(0 -1px 10px rgba(0, 0, 0, 0.1));
+  border: 1px solid #B3B3B3;
+  border-width: 1px 0 0 0;
 }
 
 @media (max-width: 767px) {
