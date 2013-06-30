@@ -1,8 +1,9 @@
-class SummaryController < ApplicationController
+class SummariesController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-		@filter = Filter.new filter_params
+		@filter = Filter.new
+		@filter.to_json( include: :conditions )
 
 		@categories = current_user.categories
 		@saldo  = 0.0
@@ -17,9 +18,18 @@ class SummaryController < ApplicationController
 			@saldo += category.budget_used
 		end
   end
- 	
-	private
-		def filter_params
-			params.permit(:filter).permit(:start_date, :end_date, :conditions, :reset)
+
+	# send the options for the filter as json string is "id"
+	def show
+		p params[:id]
+		begin
+			filter_options = JSON.parse( params[:id] )
+		rescue JSON::ParserError
+			filter_options = {}
 		end
+		@filter = Filter.new( filter_options )
+		@filter.to_json( include: :conditions )
+
+		render action: 'index'
+	end
 end

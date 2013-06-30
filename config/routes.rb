@@ -1,4 +1,6 @@
 Manatee::Application.routes.draw do
+  resources :filters
+
   devise_for :users, :skip => [:registrations]
     as :user do
       get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'
@@ -6,8 +8,9 @@ Manatee::Application.routes.draw do
     end
  
 	# for the filters
-	get "summary/index"
-  post "summary/index"
+	resources :summaries, only: [:show, :index]
+
+	resources :filters, only: [:index, :update, :delete]
 
   resources :categories
 

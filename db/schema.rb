@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130627235809) do
+ActiveRecord::Schema.define(version: 20130630154326) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -21,7 +21,23 @@ ActiveRecord::Schema.define(version: 20130627235809) do
     t.integer  "user_id"
   end
 
+  create_table "filter_conditions", force: true do |t|
+    t.string   "connector"
+    t.string   "column"
+    t.string   "operator"
+    t.string   "value"
+    t.integer  "filter_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "filters", force: true do |t|
+    t.string   "name"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "transactions", force: true do |t|

@@ -1,6 +1,12 @@
 class Filter < ActiveRecord::Base
-	after_initialize :fill_empty_attributes
-	attr_accessor :start_date, :end_date, :conditions, :reset
+	after_initialize :set_default_attributes
+
+	attr_accessor :raw
+
+	belongs_to :user
+	has_many :conditions, class_name: 'FilterCondition'
+
+	validates :name, presence: true, uniqueness: true
 
 	CONNECTORS = ['and', 'or']
 	COLUMNS = {
@@ -9,19 +15,8 @@ class Filter < ActiveRecord::Base
 		category: ['==', '!=']
 	}
 
-	def fill_empty_attributes
-		if self.reset
-			self.start_date = Date.today.beginning_of_month
-			self.end_date = Date.today.end_of_month
-			self.conditions = Array.new
-		else
-			self.start_date ||= Date.today.beginning_of_month
-			self.end_date ||= Date.today.end_of_month
-			self.conditions ||= Array.new
-		end
-	end
-
-	def persisted?
-		false
+	def set_default_attributes
+		self.start_date ||= Date.today.beginning_of_month
+		self.end_date ||= Date.today.end_of_month
 	end
 end

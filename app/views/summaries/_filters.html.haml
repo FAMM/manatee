@@ -1,0 +1,57 @@
+.well.well-small
+  %h3#filter-heading{ 'data-target' => '#form-container' }= t('.filters')
+
+  #form-container
+    =form_for @filter, url: '#', html: { class: 'form-inline filter-form' } do |f|
+      .row-fluid
+        .span3
+          %fieldset
+            %h4 Date
+            .date
+              .line
+                =label_tag :raw_start_date, t('.start_date')
+                =date_field_tag :raw_start_date, @filter.start_date, class: 'input-medium'
+
+              .line
+                =label_tag :raw_end_date, t('.end_date'), id: 'filter-raw-end-date'
+                =date_field_tag :raw_end_date, @filter.end_date, class: 'input-medium'
+
+        .span5
+          %fieldset
+            %h4 Other
+            =hidden_field_tag :raw_conditions, @filter.conditions.to_json
+            .conditions{ 'data-count' => @filter.conditions.count }
+              .condition#condition-new
+                =hidden_field_tag "condition-new-hidden-connector", nil, class: 'condition-connector'
+                =hidden_field_tag "condition-new-hidden-column", nil, class: 'condition-column'
+                =hidden_field_tag "condition-new-hidden-operator", nil, class: 'condition-operator'
+                =hidden_field_tag "condition-new-hidden-value", nil, class: 'condition-value'
+                - condition = FilterCondition.new
+                =select_tag "condition-new-connector", options_for_select( Filter::CONNECTORS.map{|c| [t(".#{c}"),c]} ), class: 'condition-connector', data: { default: condition.connector }
+                =select_tag "condition-new-column", options_for_select( Filter::COLUMNS.keys.map{|c| [t("activerecord.attributes.transaction.#{c.to_s}"),c]} ), class: 'input-medium condition-column', data: { default: condition.column }
+                - Filter::COLUMNS.each do |column, operators|
+                  %div{ class: "#{column} condition-column" }
+                    =select_tag "condition-new-#{column}-operator", options_for_select( operators.map{|o| [t(".#{o}"),o]} ), class: 'input-mini condition-operator', data: { default: condition.operator }
+                    =text_field_tag "condition-new-#{column}-value", nil, class: 'input-mini condition-value', data: { default: condition.value }
+                =button_tag t('.add'), type: 'button', class: 'btn btn-info', data: { 'remove' => t('.remove') }
+        
+        .span4
+          %fieldset
+            %h4 Presets
+            =f.hidden_field :raw
+            .control-row
+              =text_field_tag :raw_name, @filter.name
+              =button_tag t('.save'), type: 'button', id: 'save-filter', class: 'btn'
+            %p
+            .control-row
+              =select_tag "filter", nil
+              =button_tag t('.load'), type: 'button', id: 'load-filter', class: 'btn'
+              =button_tag t('.delete'), type: 'button', id: 'load-filter', class: 'btn btn-danger'
+
+        .row.hidden-desktop
+          %p.spacer &nbsp;
+        .row-fluid
+          .span12
+            .buttons.text-center
+              =f.submit t('.apply'), class: 'btn btn-primary'
+              =f.submit t('.reset'), class: 'btn', name: 'reset'

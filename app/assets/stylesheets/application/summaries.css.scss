@@ -26,7 +26,6 @@ table.treeview {
 			&.empty {
 			}
 			&.fill {
-				max-width: 100%;
 			}
 			&.currency {
 				text-align: right;
@@ -53,10 +52,10 @@ form.filter-form {
 	}
 	.date {
 		& div {
-			margin-bottom: 10px;
+			margin-bottom: 1em;
 			& input {
 				display: block;
-				margin-left: 10px;
+				margin-left: 1em;
 			}
 			& label {
 				display: block;
@@ -69,8 +68,12 @@ form.filter-form {
 				padding: 0px;
 		}
 		& > #condition-new {
+			margin-bottom: 0.5em;
 		}
 		& > .condition {
+		}
+		& select.condition-connector {
+			width: 70px;
 		}
 	}
 	.buttons {

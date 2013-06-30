@@ -4,8 +4,9 @@ class User < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :recoverable, :rememberable, :trackable
 
-  has_many :categories
-  has_many :transactions
+  has_many :categories, dependent: :delete_all
+  has_many :transactions, dependent: :delete_all
+	has_many :filters, dependent: :delete_all
 
   LANGUAGES={"English" => "en", "Deutsch" => "de", "Svenska" => "se"}
 

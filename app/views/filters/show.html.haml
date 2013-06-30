@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @filter.name
+%p
+  %b Start date:
+  = @filter.start_date
+%p
+  %b End date:
+  = @filter.end_date
+%p
+  %b User:
+  = @filter.user_id
+
+= link_to 'Edit', edit_filter_path(@filter)
+\|
+= link_to 'Back', filters_path

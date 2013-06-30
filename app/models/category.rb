@@ -1,6 +1,6 @@
 class Category < ActiveRecord::Base
 	belongs_to :user
-	has_many :transactions
+	has_many :transactions, dependent: :delete_all
 
 	attr_accessor :budget_used, :budget_used_by_date
 

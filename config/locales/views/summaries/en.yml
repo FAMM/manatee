@@ -1,12 +1,12 @@
 en:
-  summary:
+  summaries:
     filters:
       start_date: "between"
       end_date: "and"
-      add: "Add"
-      remove: "Remove"
       apply: "Apply"
       reset: "Reset filters"
+      add: "Add"
+      remove: "Remove"
     index:
       heading: "Your transactions"
       helptext: "Click on a category or date to see the transactions in it."

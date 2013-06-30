@@ -3,7 +3,7 @@
 
 .row
   .span12
-    = render partial: 'summary/filters'
+    = render partial: 'filters'
 
 .row.hidden-desktop
   .span12
@@ -17,12 +17,13 @@
     %table.summary.table.treeview
       %thead
         %tr.header
-          %td.fill.visible-desktop
-            %a{ href: '#', onClick: "allTreeView('show'); return false" }= t('.expand_all')
-            |
-            %a{ href: '#', onClick: "allTreeView('hide'); return false" }= t('.collapse_all')
-            |
-            %a{ href: '#', onClick: "$('span.buttons').toggle(); return false" }= t('.toggle_buttons')
+          %td.fill
+            .visible-desktop
+              %a{ href: '#', onClick: "allTreeView('show'); return false" }= t('.expand_all')
+              |
+              %a{ href: '#', onClick: "allTreeView('hide'); return false" }= t('.collapse_all')
+              |
+              %a{ href: '#', onClick: "$('span.buttons').toggle(); return false" }= t('.toggle_buttons')
           %th.currency= t('common.planed')
           %th.currency= t('common.used')
 
@@ -47,9 +48,10 @@
             / transaction
             %tr.treeview-item{ 'data-tv-parent' => "##{transaction.date}_#{category.name}_container", 'data-tv-level' => 2 }
               %td.fill{ 'colspan' => 2}
-                = transaction.comment
+                %span.pull-left
+                  = transaction.comment
                 %span.pull-right.buttons
-                  = button_to t('common.edit'), edit_transaction_path( transaction ), class: 'btn'
+                  = button_to t('common.edit'), edit_transaction_path( transaction ), method: :get, class: 'btn'
                   = button_to t('common.delete'), transaction, method: :delete, class: 'btn btn-danger', data: { confirm: t('common.confirmation') }
               %td.currency= formated_currency transaction.amount
             - old_date = transaction.date # set the old date
