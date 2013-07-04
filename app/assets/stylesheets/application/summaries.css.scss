@@ -4,7 +4,9 @@
 
 table.treeview {
 	& tr {
+		border: none;
 		&.header {
+			background-color: #d9edf7;
 		}
 		&.footer {
 		}
@@ -22,7 +24,17 @@ table.treeview {
 				padding-left: 10%;
 			}
 		}
+		&.category {
+			background-color: #dddddd;
+		}
+		&.date {
+			background-color: #e4e4e4;
+		}
+		&.transaction {
+			background-color: #eeeeee;
+		}
 		& td,th {
+			border: none;
 			&.empty {
 			}
 			&.fill {

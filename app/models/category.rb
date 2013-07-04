@@ -4,6 +4,10 @@ class Category < ActiveRecord::Base
 
 	attr_accessor :budget_used, :budget_used_by_date
 
+	def self.find_by_name name
+		where( name: name )
+	end
+
 	def saldo
 		money_used = 0
 		Category.transaction.each do |transaction|

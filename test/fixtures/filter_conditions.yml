@@ -11,5 +11,5 @@ two:
  filter_id: 1
  connector: 'and'
  column: 'amount'
- operator: '!='
+ operator: '<>'
  value: '0'

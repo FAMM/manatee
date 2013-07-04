@@ -1,30 +1,15 @@
 class FiltersController < ApplicationController
-  before_action :set_filter, only: [:show, :edit, :update, :destroy]
-
   # GET /filters
   # GET /filters.json
   def index
     @filters = Filter.all
   end
 
-  # GET /filters/1
-  # GET /filters/1.json
-  def show
-  end
-
-  # GET /filters/new
-  def new
-    @filter = Filter.new
-  end
-
-  # GET /filters/1/edit
-  def edit
-  end
-
   # POST /filters
   # POST /filters.json
   def create
     @filter = Filter.new(filter_params)
+		@filter.user = current_user
 
     respond_to do |format|
       if @filter.save
@@ -40,6 +25,9 @@ class FiltersController < ApplicationController
   # PATCH/PUT /filters/1
   # PATCH/PUT /filters/1.json
   def update
+		@filter_options = parse_raw params[:filter][:raw]
+    @filter = Filter.find(@filter_options["id"])
+
     respond_to do |format|
       if @filter.update(filter_params)
         format.html { redirect_to @filter, notice: 'Filter was successfully updated.' }
@@ -54,6 +42,8 @@ class FiltersController < ApplicationController
   # DELETE /filters/1
   # DELETE /filters/1.json
   def destroy
+		@filter = Filter.find( params[:id] )
+
     @filter.destroy
     respond_to do |format|
       format.html { redirect_to filters_url }
@@ -62,13 +52,32 @@ class FiltersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_filter
-      @filter = Filter.find(params[:id])
-    end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def filter_params
-      params.require(:filter).permit(:name, :start_date, :end_date, :user_id)
+			@filter_options ||= parse_raw( params[:filter][:raw] )
+			allowed_params = ["name", "start_date", "end_date", "conditions"]
+			filter_params = {}
+      @filter_options.each do |key,value|
+				if allowed_params.include?(key)
+					filter_params[key] = value
+				end
+			end
+
+			return filter_params
     end
+
+		def parse_raw raw
+			begin
+				filter_options = JSON.parse( raw.to_s )
+			rescue JSON::ParserError
+				filter_options = {}
+			end
+
+			filter_options["conditions"] ||= []
+
+			# replace the hashes with real filter conditions
+			filter_options["conditions"].map!{|c| FilterCondition.new c }
+
+			return filter_options
+		end
 end

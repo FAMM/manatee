@@ -8,9 +8,9 @@ Manatee::Application.routes.draw do
     end
  
 	# for the filters
-	resources :summaries, only: [:show, :index]
+	resource :summary, only: [:show, :create]
 
-	resources :filters, only: [:index, :update, :delete]
+	resources :filters, only: [:index, :create, :update, :destroy]
 
   resources :categories
 

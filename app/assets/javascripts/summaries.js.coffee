@@ -10,7 +10,7 @@ $().ready( () -> (
 		initializeTreeView( $(this) )
 	) )
 	
-	$( 'tr[class="treeview-container"]' ).each( () -> (
+	$( 'tr[class~="treeview-container"]' ).each( () -> (
 		element = $(this)
 		# add the click callback
 		element.click( () -> (
@@ -61,23 +61,39 @@ initializeFilterForm = () -> (
 			) )
 	) )
 
+	## strip the name attribute from every input besides the hidden inputs needed
+	for input in filterform.find( 'select,input' )
+		unless ( $(input).attr('id') == 'filter_raw' ) || ( $(input).attr('name') == 'utf8' ) || ( $(input).attr('name') == 'authenticity_token' ) 
+			$(input).removeAttr('name')
+
 	## load all the filters from the server
 	fetchFilters()
 
-	## strip the 'name' attribute, if does not start with raw_
-	filterform.find( '[name]' ).each( () -> (
-		unless $(this).attr( 'name' ).match( /^raw_/ )
-			$(this).removeAttr( 'name' )
-	) )
-
-	## make shit happen when you click the add button
+	## bring some actions to the buttons
+	# add button
 	$('div#condition-new > button[type=button]').click( () -> (
 		addFilterFormCondition()
 	) )
 
-	## when clicking on load, load the currently selected thingy
-	$('#load-filter').click( () -> (
+	# load button
+	$('#filter-load').click( () -> (
 		loadFilter( $('#filter').val() )
+	) )
+	# save button
+	$('#filter-save').click( () -> (
+		saveFilter()
+	) )
+	# delete button
+	$('#filter-delete').click( () -> (
+		deleteFilter()
+	) )
+	# apply button
+	$('#filter-apply').click( () -> (
+		applyFilter()
+	) )
+	# reset button
+	$('#filter-reset').click( () -> (
+		resetFilter()
 	) )
 
 	## hide the unneeded column options
@@ -99,17 +115,12 @@ fetchFilters = () -> (
 
 # show the divs which corrospond to the selected column
 updateFilterFormConditionColumn = ( condition ) -> (
-	column_select = condition.find( '> select.condition-column' )
-	## get the current value of the select.condition-column
-	selected = column_select.val()
-	## check all the siblings
-	column_select.siblings().each( () -> (
-		sibling = $(this)
-		if sibling.hasClass( selected )
-			sibling.show()
-		else if sibling.hasClass( 'condition-column' )
-			sibling.hide()
-	) )
+	## check all the
+	for child in condition.find('> div.condition-column')
+		if $(child).hasClass( condition.find( '> select.condition-column' ).val() )
+			$(child).css('display', 'inline-block')
+		else if $(child).hasClass( 'condition-column' )
+			$(child).css('display', 'none')
 
 	return condition
 )
@@ -118,6 +129,8 @@ updateFilterFormConditionColumn = ( condition ) -> (
 removeFilterFormCondition = ( condition ) -> (
 	$( '#br-' + condition.attr('id') ).remove()
 	condition.remove()
+
+	updateFilterFormConditions()
 
 	return condition
 )
@@ -128,19 +141,19 @@ addFilterFormCondition = () -> (
 	updateFilterFormCondition( $('#condition-new') )
 
 	## clone the stuff
-	condition = $('#condition-new').clone()
-	
+	condition_new = $('#condition-new')
+	condition = condition_new.clone()
 	## get the 'id' of the condition
 	number = $('div.conditions').first().data('count')
-	
+
 	## replace the new with the number in all IDs
 	condition.attr( 'id', 'condition-' + number )
 	condition.children().each( () -> (
-					child = $(this)
-					# reset the ids of the elements
-					id = child.attr('id')
-					if id # if the element has an ID
-						child.attr( 'id', id.replace( 'new', number ) )
+		child = $(this)
+		# reset the ids of the elements
+		id = child.attr('id')
+		if id # if the element has an ID
+			child.attr( 'id', id.replace( 'new', number ) )
 	) )
 
 	## freeze the column select (optional)
@@ -163,7 +176,7 @@ addFilterFormCondition = () -> (
 	) )
 	condition.find( 'select,input' ).each( () -> (
 		# dont run on hidden inputs and on 'select.condition-column' as it is already covered above
-		unless $(this).attr('type') == 'hidden' && ( $(this).prop('tagName') == 'SELECT' && $(this).hasClass('column') )
+		unless $(this).attr('type') == 'hidden' || ( $(this).prop('tagName') == 'SELECT' && $(this).hasClass('column') )
 			$(this).change( () -> (
 				updateFilterFormCondition( condition )
 			) )
@@ -176,11 +189,22 @@ addFilterFormCondition = () -> (
 	$('div.conditions').append( '<br id="br-condition-' + number + '">' )
 	$('div.conditions').append( condition )
 
+	## get the selected values (clone() does not copy the currently selected element in a select)
+	condition.find('select.condition-connector').val( condition_new.find('select.condition-connector').val())
+	condition.find('select.condition-column').val( condition_new.find('select.condition-column').val())
+	condition.find('select.condition-operator').val( condition_new.find('select.condition-operator').val())
+	condition.find('select.condition-value').val( condition_new.find('select.condition-value').val())
+	
+	## update the columns
+	updateFilterFormConditionColumn( condition )
+
 	## reset the attributes on the 'condition-new' inputs, but spare the hidden ones (they get updated via the updateFilterFormCondition)
-	condition_new = $('#condition-new')
-	for child in condition_new.children()
+	for child in condition_new.find('select,input')
 		unless $(child).attr( 'type' ) == 'hidden'
 			$(child).val( $(child).data( 'default' ) )
+		# reset even the json object
+		if $(child).hasClass( 'condition-json' )
+			$(child).val( '' )
 	# update it so it also affects the hidden inputs
 	updateFilterFormCondition( condition_new )
 
@@ -193,6 +217,21 @@ addFilterFormCondition = () -> (
 	return condition
 )
 
+updateFilterFormConditions = () -> (
+	# update the raw-conditions json field (collection of all conditions)
+	raw_conditions = '['
+	for raw_condition in $('input[type="hidden"].condition-json')
+		unless $(raw_condition).attr('id') == 'condition-new-json'
+			raw_conditions += $(raw_condition).val()
+			raw_conditions += ','
+
+	# remove the last ,
+	raw_conditions = raw_conditions.slice(0,-1) unless raw_conditions == '['
+
+	raw_conditions += ']'
+	$('#raw_conditions').val( raw_conditions )
+)
+
 updateFilterFormCondition = ( condition ) -> (
 	# get the values to encode
 	connector = $( '#' + condition.attr('id') + '-connector' ).val()
@@ -203,7 +242,7 @@ updateFilterFormCondition = ( condition ) -> (
 		condition_column = $(this)
 		if condition_column.is(':visible')
 			operator = condition_column.find('select.condition-operator').first().val()
-			value = condition_column.find('input.condition-value').first().val()
+			value = condition_column.find('input.condition-value,select.condition-value').first().val()
 	) )
 
 	# set the values
@@ -211,6 +250,15 @@ updateFilterFormCondition = ( condition ) -> (
 	condition.find('input[type="hidden"].condition-column').first().val( column )
 	condition.find('input[type="hidden"].condition-operator').first().val( operator )
 	condition.find('input[type="hidden"].condition-value').first().val( value )
+
+	json = new Object
+	json.connector = connector
+	json.column = column
+	json.operator = operator
+	json.value = value
+	condition.find('input[type="hidden"].condition-json').first().val( JSON.stringify( json ) )
+
+	updateFilterFormConditions()
 
 	return condition
 )
@@ -234,7 +282,7 @@ loadFilterFormConditions = () -> (
 		condition_html.find('select.condition-connector').first().val( condition.connector )
 		condition_html.find('select.condition-column').first().val( condition.column )
 		condition_html.find('select.condition-operator').first().val( condition.operator )
-		condition_html.find('input[type="text"].condition-value').first().val( condition.value )
+		condition_html.find('input[type="text"].condition-value,select.condition-value').first().val( condition.value )
 
 		# apply the values also to the hidden inputs
 		updateFilterFormCondition( condition_html )
@@ -249,6 +297,9 @@ loadFilter = ( filter_json ) -> (
 	# write the data
 	$('#filter_raw').val( filter_json )
 	filter = JSON.parse( filter_json )
+
+	# set the id
+	$('#raw_id').val( filter.id )
 
 	# set the name
 	$('#raw_name').val( filter.name )
@@ -265,9 +316,9 @@ loadFilter = ( filter_json ) -> (
 )
 
 saveFilter = () -> (
-	
 	raw = new Object
 	# collect the attributes
+	raw.id = $('#raw_id').val()
 	raw.start_date = $('#raw_start_date').val()
 	raw.end_date = $('#raw_end_date').val()
 	raw.name = $('#raw_name').val()
@@ -276,20 +327,91 @@ saveFilter = () -> (
 	# create a JSON string
 	json = JSON.stringify( raw )
 
-	# send it to the server
-	$.ajax(
-		{
-			url: '/filters'
-		}
-	)
+	# if there is an id, update the filter, otherwise create a new one
+	if raw.id
+		$.ajax(
+			{
+				type: "PUT",
+				url: '/filters/' + raw.id + '.json',
+				data: { filter: { raw: json } },
+				dataType: 'json',
+				success: (data) -> (
+					alert 'success'
+					console.log data
+				),
+				fail: (data) -> (
+					alert 'failure'
+					console.log data
+				)
+			}
+		)
+	else
+		$.ajax(
+			{
+				type: "POST",
+				url: '/filters.json',
+				data: { filter: { raw: json } },
+				dataType: 'json',
+				success: (data) -> (
+					alert 'success'
+					console.log data
+				),
+				fail: (data) -> (
+					alert 'failure'
+					console.log data
+				)
+			}
+		)
 
-	return false
+	return true
 )
 
 deleteFilter = () -> (
-	'asdf'
-	return false
+	json = JSON.parse( $('#filter').val() )
+	$.ajax( {
+		type: "DELETE",
+		url: '/filters/' + json.id  + '.json',
+		dataType: 'json',
+		success: (data) -> (
+			alert 'success'
+			console.log data
+		),
+		fail: (data) -> (
+			alert 'failure'
+			console.log data
+		)
+		}
+	)
+	
+	return true
 )
+
+applyFilter = () -> (
+	# build the raw-json-filter
+	filter = new Object
+	# collect the attributes
+	filter.id = $('raw_id').val()
+	filter.start_date = $('#raw_start_date').val()
+	filter.end_date = $('#raw_end_date').val()
+	filter.name = $('#raw_name').val()
+	filter.conditions = JSON.parse( $('#raw_conditions').val() )
+
+	# create a JSON string
+	json = JSON.stringify( filter )
+
+	# write the value
+	$('#filter_raw').val( json )
+
+	$('form.filter-form').submit()
+)
+
+resetFilter = () -> (
+	$('#filter_raw').val( '{}' )
+	$('form.filter-form').submit()
+)
+
+
+
 
 ####
 # TreeView stuff

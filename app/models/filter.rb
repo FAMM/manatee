@@ -10,9 +10,9 @@ class Filter < ActiveRecord::Base
 
 	CONNECTORS = ['and', 'or']
 	COLUMNS = {
-		amount: ['==', '!=', '<', '>', '>=', '<='],
-		comment: ['==', '!='],
-		category: ['==', '!=']
+		amount: ['=', '<>', '<', '>', '>=', '<='],
+		comment: ['=', '<>'],
+		category: ['=', '<>']
 	}
 
 	def set_default_attributes

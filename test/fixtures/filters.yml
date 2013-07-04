@@ -3,8 +3,8 @@
 one:
   id: 1
   name: "positive transactions"
-  start_date: 2013-06-01
-  end_date: 2013-06-30
+  start_date: 2013-07-01
+  end_date: 2013-07-31
   user_id: 1
 
 two:

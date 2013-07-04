@@ -2,8 +2,8 @@
   %h3#filter-heading{ 'data-target' => '#form-container' }= t('.filters')
 
   #form-container
-    =form_for @filter, url: '#', html: { class: 'form-inline filter-form' } do |f|
-      .row-fluid
+    =form_for @filter, url: summary_path, html: { class: 'form-inline filter-form' } do |f|
+      .row-fluid.filters
         .span3
           %fieldset
             %h4 Date
@@ -22,6 +22,7 @@
             =hidden_field_tag :raw_conditions, @filter.conditions.to_json
             .conditions{ 'data-count' => @filter.conditions.count }
               .condition#condition-new
+                =hidden_field_tag "condition-new-json", nil, class: 'condition-json'
                 =hidden_field_tag "condition-new-hidden-connector", nil, class: 'condition-connector'
                 =hidden_field_tag "condition-new-hidden-column", nil, class: 'condition-column'
                 =hidden_field_tag "condition-new-hidden-operator", nil, class: 'condition-operator'
@@ -32,26 +33,31 @@
                 - Filter::COLUMNS.each do |column, operators|
                   %div{ class: "#{column} condition-column" }
                     =select_tag "condition-new-#{column}-operator", options_for_select( operators.map{|o| [t(".#{o}"),o]} ), class: 'input-mini condition-operator', data: { default: condition.operator }
-                    =text_field_tag "condition-new-#{column}-value", nil, class: 'input-mini condition-value', data: { default: condition.value }
+                    / the category should be a select
+                    - if column == :category
+                      =select_tag "condition-new-#{column}-value", options_for_select( current_user.categories.map{|c| [c.name, c.id]} ), class: 'input-small condition-value', data: { default: condition.value }, autocomplete: "off"
+                    - else
+                      =text_field_tag "condition-new-#{column}-value", nil, class: 'input-small condition-value', data: { default: condition.value }, autocomplete: "off"
                 =button_tag t('.add'), type: 'button', class: 'btn btn-info', data: { 'remove' => t('.remove') }
         
         .span4
           %fieldset
             %h4 Presets
             =f.hidden_field :raw
+            =hidden_field_tag :raw_id, @filter.id
             .control-row
               =text_field_tag :raw_name, @filter.name
-              =button_tag t('.save'), type: 'button', id: 'save-filter', class: 'btn'
+              =button_tag t('.save'), type: 'button', id: 'filter-save', class: 'btn'
             %p
             .control-row
               =select_tag "filter", nil
-              =button_tag t('.load'), type: 'button', id: 'load-filter', class: 'btn'
-              =button_tag t('.delete'), type: 'button', id: 'load-filter', class: 'btn btn-danger'
+              =button_tag t('.load'), type: 'button', id: 'filter-load', class: 'btn'
+              =button_tag t('.delete'), type: 'button', id: 'filter-delete', class: 'btn btn-danger'
 
         .row.hidden-desktop
           %p.spacer &nbsp;
         .row-fluid
           .span12
             .buttons.text-center
-              =f.submit t('.apply'), class: 'btn btn-primary'
-              =f.submit t('.reset'), class: 'btn', name: 'reset'
+              =button_tag t('.apply'), type: 'button', class: 'btn btn-primary', id: 'filter-apply'
+              =button_tag t('.reset'), type: 'button', class: 'btn', name: 'reset', id: 'filter-reset'

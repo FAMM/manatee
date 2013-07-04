@@ -1,15 +1,19 @@
 en:
   summaries:
     filters:
+      filters: "Filters"
       start_date: "between"
       end_date: "and"
       apply: "Apply"
       reset: "Reset filters"
-      add: "Add"
-      remove: "Remove"
-    index:
+      #add: "Add"
+      #remove: "Remove"
+      add: "+"
+      remove: "-"
+    show:
       heading: "Your transactions"
       helptext: "Click on a category or date to see the transactions in it."
       expand_all: "Expand all"
       collapse_all: "Collapse all"
       toggle_buttons: "Toggle buttons"
+      no_transactions: "Sorry, no transactions matching your criteria found."
