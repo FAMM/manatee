@@ -5,7 +5,7 @@ class SummariesController < ApplicationController
 		@filter = Filter.new
 		@filter.to_json( include: :conditions )
 
-		transactions = Transaction.with_filter @filter
+		transactions = current_user.transactions.with_filter @filter
 		@summary, @sum = create_summary transactions
 	end
 
@@ -24,7 +24,7 @@ class SummariesController < ApplicationController
 		@filter = Filter.new( filter_options )
 		@filter.to_json( include: :conditions )
 
-		transactions = Transaction.with_filter @filter
+		transactions = current_user.transactions.with_filter @filter
 		@summary, @sum = create_summary transactions
 
 		render action: 'show'
