@@ -1,0 +1,20 @@
+%h1= t('.heading')
+
+%table.table
+  %thead
+    %tr
+      %th= t('activerecord.attributes.category.name')
+      %th= t('activerecord.attributes.category.budget')
+      %th &nbsp;
+
+  %tbody
+    - @categories.each do |category|
+      %tr
+        %td= category.name
+        %td= category.budget
+        %td
+          .pull-right.inline-buttons
+            = button_to t('common.edit'), edit_category_path(category), method: :get, class: 'btn'
+            = button_to t('common.delete'), category, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }
+
+%p= link_to t('common.new', entity: t('activerecord.models.category')), new_category_path

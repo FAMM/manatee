@@ -1,3 +1,6 @@
 en:
   categories:
     overview:
+    index:
+      heading: "Your categories"
+      

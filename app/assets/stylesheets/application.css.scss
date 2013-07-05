@@ -82,3 +82,12 @@ footer  {
 	font-size: small;
 	text-align: center;
 }
+.inline-buttons {
+	& > form {
+		display: inline-block;
+		margin: 0px;
+		& input[type="submit"],input[type="reset"],button {
+			display: inline;
+		}
+	}
+}

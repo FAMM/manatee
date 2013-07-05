@@ -17,6 +17,9 @@
           %li{:class => (controller.controller_name=="summaries") ? "active":nil}
             %a{:style => "font-weight:normal", :href => summary_path}
               %i.icon-list.icon-white
+          %li{:class => (controller.controller_name=="categories") ? "active":nil}
+            %a{:style => "font-weight:normal", :href => categories_path}
+              %i.icon-tags.icon-white
 
         %ul.nav.pull-right
           %li.navbar-text

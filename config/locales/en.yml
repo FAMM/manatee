@@ -2,6 +2,8 @@ en:
   entities:
     new: "New %{entity}"
   common:
+    new: "New %{entity}"
+    show: "Show"
     edit: "Edit"
     delete: "Delete"
     saldo: "Saldo"
