@@ -51,7 +51,7 @@
                   %td.fill{ 'colspan' => 2}
                     %span.pull-left
                       = transaction.comment
-                    %span.pull-right.buttons
+                    %span.pull-right.inline-buttons.buttons
                       = button_to t('common.edit'), edit_transaction_path( transaction ), method: :get, class: 'btn'
                       = button_to t('common.delete'), transaction, method: :delete, class: 'btn btn-danger', data: { confirm: t('common.confirmation') }
                   %td.currency= formated_currency transaction.amount

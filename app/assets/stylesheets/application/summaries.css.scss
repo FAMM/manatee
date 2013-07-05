@@ -75,19 +75,11 @@ form.filter-form {
 		}
 	}
 	.conditions {
-		& div {
-				display: inline-block;
-				padding: 0px;
-		}
 		& > #condition-new {
 			margin-bottom: 0.5em;
-		}
-		& > .condition {
 		}
 		& select.condition-connector {
 			width: 70px;
 		}
-	}
-	.buttons {
 	}
 }
