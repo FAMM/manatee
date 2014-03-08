@@ -17,6 +17,7 @@ class TransactionsController < ApplicationController
   # GET /transactions/new
   def new
     @transaction = Transaction.new
+		@transaction.date = Time.now.to_date
   end
 
   # GET /transactions/1/edit
@@ -74,6 +75,6 @@ class TransactionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
-      params.require(:transaction).permit(:amount, :comment, :category_name )
+      params.require(:transaction).permit(:amount, :comment, :category_id, :date )
     end
 end

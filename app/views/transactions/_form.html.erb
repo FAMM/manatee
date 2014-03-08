@@ -25,6 +25,11 @@
 		<%= select( "transaction", "category_id", current_user.categories.all.map{ |c| [ c.name, c.id ] }, { prompt: 'Select a category' } ) %>
   </div>
 
+	<div class="field">
+    <%= f.label :date %>
+		<%= f.date_field :date %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

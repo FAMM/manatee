@@ -7,14 +7,14 @@ class WelcomeController < ApplicationController
 			@transactions = current_user.transactions.includes( :category ).limit(10)
 			
 			# fetch the categories for the sidebar
-			@categories = current_user.categories
+			@categories = current_user.categories.includes( :transactions )
 			
 			@sum_budget = 0.0
 			@sum_budget_used = 0.0
 			@categories.each do |category|
 				category.budget_used = 0.0
-				category.transactions.where( date: Date.today.beginning_of_month..Date.today.end_of_month ).each do |transaction|
-					 category.budget_used += transaction.amount
+				category.transactions.this_month.each do |t|
+					 category.budget_used += t.amount
 				end
 				@sum_budget += category.budget
 				@sum_budget_used += category.budget_used
