@@ -25,6 +25,36 @@ class User < ActiveRecord::Base
   end
 
   def saldo
-    return 0
+    # get how much is spend in the actual month
+    spend = 0
+    self.transactions.this_month.each do |t|
+      spend += t.amount
+    end
+
+    # get how much is planned per month
+    planned = 0
+    self.categories.each do |c|
+      planned += c.budget
+    end
+
+    # return how much is left
+    return ( planned - spend )
+  end
+
+  def saldo_in_percent
+    # get how much is spend in the actual month
+    spend = 0
+    self.transactions.this_month.each do |t|
+      spend += t.amount
+    end
+
+    # get how much is planned per month
+    planned = 0
+    self.categories.each do |c|
+      planned += c.budget
+    end
+
+    # return how much is left
+    return ( spend / planned  )
   end
 end
