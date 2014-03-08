@@ -24,7 +24,7 @@
         %ul.nav.pull-right
           %li.navbar-text
             = t('common.saldo')
-            = number_to_currency current_user.saldo
+            = formated_currency( current_user.saldo )
           %li.divider-vertical
           %li.dropdown
             %a.dropdown-toggle{:href=>"#", "data-toggle"=>"dropdown"}

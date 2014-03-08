@@ -23,8 +23,8 @@ class User < ActiveRecord::Base
       where(conditions).first
     end
   end
-	
-	def saldo
-		0
-	end
+
+  def saldo
+    return 0
+  end
 end
