@@ -16,10 +16,10 @@ $gridColumnWidth: 70px !default;
 $gridGutterWidth: 30px !default;
 $gridRowWidth: (12 * $gridColumnWidth) + ($gridGutterWidth * 11) !default;
 @import 'bootstrap';
-@import "bootstrap-responsive";
+
 
 body{
-  background-color: $grayLighter;
+  background-color: $gray-lighter;
 }
 
 .container {
@@ -29,10 +29,10 @@ body{
 .box{
   max-width: 480px;
   position: relative;
-  @include border-radius(5px);
-  @include box-shadow(5px 5px 5px $grayLight);
+  border-radius: 5px;
+  @include box-shadow(5px 5px 5px $gray-light);
   margin: auto;
-  padding: 20px;
+  padding: 30px;
   background: white;
 }
 
