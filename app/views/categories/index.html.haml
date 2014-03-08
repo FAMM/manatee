@@ -11,7 +11,7 @@
     - @categories.each do |category|
       %tr
         %td= category.name
-        %td= category.budget
+        %td= formated_currency( category.budget )
         %td
           .pull-right.inline-buttons
             = button_to t('common.edit'), edit_category_path(category), method: :get, class: 'btn'
