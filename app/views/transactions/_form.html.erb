@@ -19,6 +19,12 @@
     <%= f.label :comment %><br>
     <%= f.text_field :comment %>
   </div>
+
+	<div class="field">
+    <%= f.label :category_id %>
+		<%= select( "transaction", "category_id", current_user.categories.all.map{ |c| [ c.name, c.id ] }, { prompt: 'Select a category' } ) %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

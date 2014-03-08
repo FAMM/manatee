@@ -28,6 +28,9 @@ class TransactionsController < ApplicationController
   def create
     @transaction = Transaction.new(transaction_params)
 
+    # make the transaction belong to the current user
+		@transaction.user = current_user
+
     respond_to do |format|
       if @transaction.save
         format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
@@ -71,6 +74,6 @@ class TransactionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
-      params.require(:transaction).permit(:amount, :comment )
+      params.require(:transaction).permit(:amount, :comment, :category_name )
     end
 end
