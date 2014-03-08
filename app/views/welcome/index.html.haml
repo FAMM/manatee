@@ -16,7 +16,7 @@
           - @transactions.each do |transaction|
             %tr
               %td= transaction.comment
-              %td= transaction.category
+              %td= transaction.category.name
               %td.currency= formated_currency( transaction.amount )
 
   .span3.hidden-phone#sidebar
