@@ -8,8 +8,8 @@ en:
     delete: "Delete"
     saldo: "Saldo"
     sum: "Sum"
-    planned: "Target"
-    used: "Actual"
+    planned: "Bugeted"
+    used: "Used"
     confirmation: "Are your sure?"
   date:
     abbr_day_names:
