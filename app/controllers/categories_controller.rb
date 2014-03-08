@@ -28,6 +28,9 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(category_params)
 
+    # set the current user as its owner
+    @category.user = current_user
+
     respond_to do |format|
       if @category.save
         format.html { redirect_to @category, notice: 'Category was successfully created.' }
