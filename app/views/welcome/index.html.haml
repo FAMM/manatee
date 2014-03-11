@@ -1,26 +1,21 @@
 .row
-  .span9
+  .col-md-9
     .page-header
       %h1 Dashboard
 
     %p
-      %h2= t('.last_n_transactions', n: 10)
+      %h3= t('.last_n_transactions', n: 10)
 
-    .row
-      .span9
-        %table.table.table-striped
-          %tr
-            %th= t('.comment')
-            %th= t('.category')
-            %th.currency= t('.amount')
-          - @transactions.each do |transaction|
-            %tr
-              %td= transaction.comment
-              %td= transaction.category.name
-              %td.currency= formated_currency( transaction.amount )
+    %table.table.table-striped
+      %tr
+        %th= t('.comment')
+        %th= t('.category')
+        %th.currency= t('.amount')
+      - @transactions.each do |transaction|
+        %tr
+          %td= transaction.comment
+          %td= transaction.category.name
+          %td.currency= formated_currency( transaction.amount )
 
-        %div= link_to( t('.new_transaction'), new_transaction_path )
-
-  .span3.hidden-phone#sidebar
-    %h3= t('.categories')
+  .col-md-3.hidden-phone#sidebar
     =render :partial => 'categories/overview'
