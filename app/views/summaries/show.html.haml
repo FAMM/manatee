@@ -1,63 +1,60 @@
 .page-header
   %h1= t('.heading')
 
-.row
-  .span12
-    = render partial: 'filters'
+= render partial: 'filters'
 
-.row.hidden-desktop
-  .span12
-    %a{ href: '#', onClick: "allTreeView('show'); return false" }= t('.expand_all')
-    |
-    %a{ href: '#', onClick: "allTreeView('hide'); return false" }= t('.collapse_all')
-    |
-    %a{ href: '#', onClick: "$('span.buttons').toggle(); return false" }= t('.toggle_buttons')
-.row
-  .span12
-    %table.table.table-bordered.summary.treeview
-      - if @summary.empty?
-        %tr.info
-          %td{ colspan: 3 }= t('.no_transactions')
-      - else
-        %thead
-          %tr.header
-            %td.fill
-              .visible-desktop
-                %a{ href: '#', onClick: "allTreeView('show'); return false" }= t('.expand_all')
-                |
-                %a{ href: '#', onClick: "allTreeView('hide'); return false" }= t('.collapse_all')
-                |
-                %a{ href: '#', onClick: "$('span.buttons').toggle(); return false" }= t('.toggle_buttons')
-            %th.currency= t('common.planed')
-            %th.currency= t('common.used')
+.hidden-desktop
+  %a{ href: '#', onClick: "allTreeView('show'); return false" }= t('.expand_all')
+  |
+  %a{ href: '#', onClick: "allTreeView('hide'); return false" }= t('.collapse_all')
+  |
+  %a{ href: '#', onClick: "$('span.buttons').toggle(); return false" }= t('.toggle_buttons')
 
-        %tbody
-          - @summary.each do |category,dates|
-            / category
-            %tr.treeview-container.category{ 'id' => "#{category.name}_container", 'data-tv-expanded' => 0, 'data-tv-level' => 0 }
-              %td.fill= category.name
-              %td.currency= formated_currency category.budget
-              %td.currency= formated_currency category.budget_used
 
-            - dates.each do |date,transactions|
-              / date
-              %tr.treeview-container.date{ 'id' => "#{date}_#{category.name}_container", 'data-tv-expanded' => 0, 'data-tv-parent' => "##{category.name}_container", 'data-tv-level' => 1 }
-                %td.fill{ 'colspan' => 2  }= l date, format: :long
-                %td.currency= formated_currency category.budget_used_by_date[date]
+%table.table.table-bordered.summary.treeview
+  - if @summary.empty?
+    %tr.info
+      %td{ colspan: 3 }= t('.no_transactions')
+  - else
+    %thead
+      %tr.header
+        %td.fill
+          .visible-desktop
+            %a{ href: '#', onClick: "allTreeView('show'); return false" }= t('.expand_all')
+            |
+            %a{ href: '#', onClick: "allTreeView('hide'); return false" }= t('.collapse_all')
+            |
+            %a{ href: '#', onClick: "$('span.buttons').toggle(); return false" }= t('.toggle_buttons')
+        %th.currency= t('common.planed')
+        %th.currency= t('common.used')
 
-              - transactions.each do |transaction|
-                / transaction
-                %tr.treeview-item.transaction{ 'data-tv-parent' => "##{date}_#{category.name}_container", 'data-tv-level' => 2 }
-                  %td.fill{ 'colspan' => 2}
-                    %span.pull-left
-                      = transaction.comment
-                    %span.pull-right.inline-buttons.buttons
-                      = button_to t('common.edit'), edit_transaction_path( transaction ), method: :get, class: 'btn'
-                      = button_to t('common.delete'), transaction, method: :delete, class: 'btn btn-danger', data: { confirm: t('common.confirmation') }
-                  %td.currency= formated_currency transaction.amount
-          %tr.footer.info
-            %td.fill{ colspan: 2 }= t('common.sum')
-            %td.currency= formated_currency @sum
+    %tbody
+      - @summary.each do |category,dates|
+        / category
+        %tr.treeview-container.category{ 'id' => "#{category.name}_container", 'data-tv-expanded' => 0, 'data-tv-level' => 0 }
+          %td.fill= category.name
+          %td.currency= formated_currency category.budget
+          %td.currency= formated_currency category.budget_used
 
-.row        
-  %p.helptext= t('.helptext')
+        - dates.each do |date,transactions|
+          / date
+          %tr.treeview-container.date{ 'id' => "#{date}_#{category.name}_container", 'data-tv-expanded' => 0, 'data-tv-parent' => "##{category.name}_container", 'data-tv-level' => 1 }
+            %td.fill{ 'colspan' => 2  }= l date, format: :long
+            %td.currency= formated_currency category.budget_used_by_date[date]
+
+          - transactions.each do |transaction|
+            / transaction
+            %tr.treeview-item.transaction{ 'data-tv-parent' => "##{date}_#{category.name}_container", 'data-tv-level' => 2 }
+              %td.fill{ 'colspan' => 2}
+                %span.pull-left
+                  = transaction.comment
+                %span.pull-right.inline-buttons.buttons
+                  = button_to t('common.edit'), edit_transaction_path( transaction ), method: :get, class: 'btn'
+                  = button_to t('common.delete'), transaction, method: :delete, class: 'btn btn-danger', data: { confirm: t('common.confirmation') }
+              %td.currency= formated_currency transaction.amount
+      %tr.footer.info
+        %td.fill{ colspan: 2 }= t('common.sum')
+        %td.currency= formated_currency @sum
+
+
+%p.helptext= t('.helptext')
