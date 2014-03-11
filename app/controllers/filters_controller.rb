@@ -13,10 +13,8 @@ class FiltersController < ApplicationController
 
     respond_to do |format|
       if @filter.save
-        format.html { redirect_to @filter, notice: 'Filter was successfully created.' }
         format.json { render action: 'show', status: :created, location: @filter }
       else
-        format.html { render action: 'new' }
         format.json { render json: @filter.errors, status: :unprocessable_entity }
       end
     end
