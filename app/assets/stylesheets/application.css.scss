@@ -23,7 +23,7 @@ $navbarBackground: #D2D2D2;
 
 html,body  {
   height:100%;
-  background-color: $grayLighter;
+  background-color: $gray-lighter;
 }
 
 .main-container {
@@ -59,7 +59,7 @@ html,body  {
 
 footer  {
   height: 35px;
-  background-color: $grayLighter;
+  background-color: $gray-lighter;
   @include box-shadow(0 -1px 10px rgba(0, 0, 0, 0.1));
   border: 1px solid #B3B3B3;
   border-width: 1px 0 0 0;
@@ -78,7 +78,7 @@ footer  {
 	text-align: right;
 }
 .helptext {
-	color: $grayLight;
+	color: $gray-light;
 	font-size: small;
 	text-align: center;
 }
