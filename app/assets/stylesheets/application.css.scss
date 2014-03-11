@@ -59,9 +59,9 @@ html,body  {
 
 footer  {
   height: 35px;
-  background-color: $gray-lighter;
-  @include box-shadow(0 -1px 10px rgba(0, 0, 0, 0.1));
-  border: 1px solid #B3B3B3;
+  background-color: #F8F8F8;
+  //@include box-shadow(0 -1px 10px rgba(0, 0, 0, 0.1));
+  border: 1px solid #E7E7E7;
   border-width: 1px 0 0 0;
 }
 
