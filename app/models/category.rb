@@ -1,6 +1,6 @@
 class Category < ActiveRecord::Base
-	belongs_to :user
-	has_many :transactions, dependent: :delete_all
+	belongs_to :budget
+	has_many :transactions, dependent: :destroy
 
 	attr_accessor :budget_used, :budget_used_by_date
 
@@ -15,6 +15,6 @@ class Category < ActiveRecord::Base
 			used += transaction.amount
 		end
 
-		return used
+		used
 	end
 end

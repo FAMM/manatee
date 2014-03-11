@@ -1,5 +1,4 @@
 class Transaction < ActiveRecord::Base
-	belongs_to :user
 	belongs_to :category
 
 	def self.this_month
