@@ -1,20 +1,25 @@
 %h1= t('.heading')
 
 %table.table
-  %thead
+  %tr
+    %th= t('activerecord.models.category')
+    %th.currency= t('common.planned')
+    %th.currency= t('common.used')
+    %th &nbsp;
+  - @categories.each do |category|
     %tr
-      %th= t('activerecord.attributes.category.name')
-      %th= t('activerecord.attributes.category.budget')
-      %th &nbsp;
+      %td= category.name
+      %td.currency= number_to_currency category.budget
+      %td.currency= number_to_currency category.used_this_month
+      %td
+        .pull-right.inline-buttons
+          = button_to t('common.edit'), edit_category_path(category), method: :get, class: 'btn'
+          = button_to t('common.delete'), category, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }
 
-  %tbody
-    - @categories.each do |category|
-      %tr
-        %td= category.name
-        %td= formated_currency( category.budget )
-        %td
-          .pull-right.inline-buttons
-            = button_to t('common.edit'), edit_category_path(category), method: :get, class: 'btn'
-            = button_to t('common.delete'), category, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }
+  %tr.info
+    %td= t('common.sum')
+    %td.currency= number_to_currency @sum_budget
+    %td.currency= number_to_currency @sum_budget_used
+    %td &nbsp;
 
 %p= link_to t('common.new', entity: t('activerecord.models.category')), new_category_path

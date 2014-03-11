@@ -8,7 +8,7 @@ class SummariesController < ApplicationController
 		transactions = current_user.transactions.with_filter @filter
 		@summary, @sum = create_summary transactions
 	end
-
+ 
 	def create
 		begin
 			filter_options = JSON.parse( params[:filter][:raw].to_s )

@@ -12,12 +12,8 @@ class WelcomeController < ApplicationController
 			@sum_budget = 0.0
 			@sum_budget_used = 0.0
 			@categories.each do |category|
-				category.budget_used = 0.0
-				category.transactions.this_month.each do |t|
-					 category.budget_used += t.amount
-				end
 				@sum_budget += category.budget
-				@sum_budget_used += category.budget_used
+				@sum_budget_used += category.used_this_month
 			end
 		end
   end

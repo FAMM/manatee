@@ -6,7 +6,14 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.all
+		@categories = current_user.categories.includes( :transactions )
+			
+		@sum_budget = 0.0
+		@sum_budget_used = 0.0
+		@categories.each do |category|
+			@sum_budget += category.budget
+			@sum_budget_used += category.used_this_month
+		end
   end
 
   # GET /categories/1
@@ -16,7 +23,7 @@ class CategoriesController < ApplicationController
 
   # GET /categories/new
   def new
-    @category = Category.new
+    @category = current_user.category.new
   end
 
   # GET /categories/1/edit
@@ -26,10 +33,7 @@ class CategoriesController < ApplicationController
   # POST /categories
   # POST /categories.json
   def create
-    @category = Category.new(category_params)
-
-    # set the current user as its owner
-    @category.user = current_user
+    @category = current_user.category.new(category_params)
 
     respond_to do |format|
       if @category.save
@@ -69,7 +73,7 @@ class CategoriesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_category
-      @category = Category.find(params[:id])
+      @category = current_user.category.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

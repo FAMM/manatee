@@ -22,4 +22,5 @@
         %div= link_to( t('.new_transaction'), new_transaction_path )
 
   .span3.hidden-phone#sidebar
+    %h3= t('.categories')
     =render :partial => 'categories/overview'
