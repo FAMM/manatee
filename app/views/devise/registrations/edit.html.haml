@@ -3,38 +3,38 @@
   %fieldset
     %legend= t("devise.registrations.edit.title")
 
-    .control-group
-      =f.label :name, :class => "control-label"
-      .controls
-        =f.text_field :name, :autofocus => true
+    .form-group
+      =f.label :name, :class => "control-label col-sm-2"
+      .col-sm-7
+        =f.text_field :name, :autofocus => true, :class => "form-control"
 
-    .control-group
-      =f.label :email, :class => "control-label"
-      .controls
-        =f.email_field :email
+    .form-group
+      =f.label :email, :class => "control-label col-sm-2"
+      .col-sm-7
+        =f.email_field :email, :class => "form-control"
 
-    .control-group
-      =f.label :password, :class => "control-label"
-      .controls
-        =f.password_field :password
+    .form-group
+      =f.label :password, :class => "control-label col-sm-2"
+      .col-sm-7
+        =f.password_field :password, :class => "form-control"
 
-    .control-group
-      =f.label :password_confirmation, :class => "control-label"
-      .controls
-        =f.password_field :password_confirmation
+    .form-group
+      =f.label :password_confirmation, :class => "control-label col-sm-2"
+      .col-sm-7
+        =f.password_field :password_confirmation, :class => "form-control"
 
-    .control-group
-      =f.label :language, :class => "control-label"
-      .controls
-        =f.select :language,  User::LANGUAGES.to_a, :prompt => t("devise.registrations.edit.select_language")
+    .form-group
+      =f.label :language, :class => "control-label col-sm-2"
+      .col-sm-7
+        =f.select :language,  User::LANGUAGES.to_a, :prompt => t("devise.registrations.edit.select_language"), :class => "form-control"
 
-    .control-group
-      =f.label :current_password, t("devise.registrations.edit.current_password"), :class => "control-label"
-      .controls
-        =f.password_field :current_password
+    .form-group
+      =f.label :current_password, t("devise.registrations.edit.current_password"), :class => "control-label col-sm-2"
+      .col-sm-7
+        =f.password_field :current_password, :class => "form-control"
 
-    .form-actions
-      %p
+    .form-group
+      .col-sm-offset-2.col-sm-7
         = f.submit t("devise.registrations.edit.button"), :class => "btn btn-primary"
         = link_to t("devise.registrations.destroy_button"), user_registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "btn btn-danger"
-      = render "devise/shared/links"
+        = render "devise/shared/links"
