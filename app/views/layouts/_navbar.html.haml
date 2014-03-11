@@ -22,10 +22,6 @@
             %i.glyphicon.glyphicon-tags
 
       %ul.nav.navbar-nav.pull-right
-        %li.navbar-text
-          = t('common.saldo')
-          = formated_currency( current_user.saldo )
-        %li.divider-vertical
         %li.dropdown
           %a.dropdown-toggle{:href=>"#", "data-toggle"=>"dropdown"}
             =current_user.name

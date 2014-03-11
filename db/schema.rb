@@ -11,14 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140308014102) do
+ActiveRecord::Schema.define(version: 20140311234226) do
+
+  create_table "budgets", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "description"
+  end
+
+  create_table "budgets_users", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "budget_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "categories", force: true do |t|
     t.string   "name"
-    t.decimal  "budget",     precision: 20, scale: 2
+    t.decimal  "planed",     precision: 20, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
+    t.integer  "budget_id"
   end
 
   create_table "filter_conditions", force: true do |t|

@@ -14,7 +14,9 @@ Manatee::Application.routes.draw do
 
   resources :categories
 
-  resources :transactions
+  resources :budgets do
+    resources :transactions
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,7 +1,6 @@
 module ApplicationHelper
-				def formated_currency *args
-								currency = number_to_currency *args
-
-								"<span=\"currency\">#{currency}</span>".html_safe
-				end
+  def formated_currency *args
+    currency = number_to_currency *args
+    content_tag :span, currency, :class => "currency"
+  end
 end

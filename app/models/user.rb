@@ -4,9 +4,11 @@ class User < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :recoverable, :rememberable, :trackable
 
-  has_many :categories, dependent: :delete_all
-  has_many :transactions, dependent: :delete_all
-	has_many :filters, dependent: :delete_all
+  has_and_belongs_to_many :budgets
+  has_many :categories, :through => :budgets
+  has_many :transactions
+
+  has_many :filters, dependent: :delete_all
 
   LANGUAGES={"English" => "en", "Deutsch" => "de", "Svenska" => "se"}
 
@@ -22,39 +24,5 @@ class User < ActiveRecord::Base
     else
       where(conditions).first
     end
-  end
-
-  def saldo
-    # get how much is spend in the actual month
-    spend = 0
-    self.transactions.this_month.each do |t|
-      spend += t.amount
-    end
-
-    # get how much is planned per month
-    planned = 0
-    self.categories.each do |c|
-      planned += c.budget
-    end
-
-    # return how much is left
-    return ( planned - spend )
-  end
-
-  def saldo_in_percent
-    # get how much is spend in the actual month
-    spend = 0
-    self.transactions.this_month.each do |t|
-      spend += t.amount
-    end
-
-    # get how much is planned per month
-    planned = 0
-    self.categories.each do |c|
-      planned += c.budget
-    end
-
-    # return how much is left
-    return ( spend / planned  )
   end
 end
