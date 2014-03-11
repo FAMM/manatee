@@ -26,13 +26,13 @@
                   =flash[:notice]
 
               -if flash[:error]
-                .alert.alert-error
+                .alert.alert-danger
                   %button{:type=>"button",:class=>"close","data-dismiss"=>"alert"}
                     &times;
                   =flash[:error]
 
               - if flash[:alert]
-                .alert.alert-notice
+                .alert.alert-warning
                   %button{:type=>"button",:class=>"close","data-dismiss"=>"alert"}
                     &times;
                   =flash[:alert]

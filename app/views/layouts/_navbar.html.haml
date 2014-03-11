@@ -1,37 +1,36 @@
-.navbar.navbar-fixed-top
-  .navbar-inner
-    .container
-      %button{:type=>"button", :class=>"btn btn-navbar", "data-toggle"=>"collapse", "data-target"=>".nav-collapse"}
+.navbar.navbar-default.navbar-fixed-top
+  .container
+    .navbar-header
+      %button{:type=>"button", :class=>"navbar-toggle", "data-toggle"=>"collapse", "data-target"=>".navbar-collapse"}
+        %span.sr-only Toggle navigation
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
 
-      %a.brand{:href=>root_url}
+      %a.navbar-brand{:href=>root_url}
         =image_tag "manatee.png", :style => "width:20px"
         Manatee
-      .nav-collapse.collapse.text-center
-        %ul.nav
-          %li{:class => (controller.controller_name=="welcome") ? "active":nil}
-            %a{:style => "font-weight:normal", :href => root_path}
-              %i.icon-home.icon-white
-          %li{:class => (controller.controller_name=="summaries") ? "active":nil}
-            %a{:style => "font-weight:normal", :href => summary_path}
-              %i.icon-list.icon-white
-          %li{:class => (controller.controller_name=="categories") ? "active":nil}
-            %a{:style => "font-weight:normal", :href => categories_path}
-              %i.icon-tags.icon-white
 
-        %ul.nav.pull-right
-          %li.navbar-text
-            = t('common.saldo')
-            = number_to_currency current_user.saldo
-          %li.divider-vertical
-          %li.dropdown
-            %a.dropdown-toggle{:href=>"#", "data-toggle"=>"dropdown"}
-              =current_user.name
-              %b.caret
-            %ul.dropdown-menu
-              %li
-                =link_to "Account", edit_user_registration_path
-              %li
-                =link_to "Logout", destroy_user_session_path, :method => :delete
+
+    .navbar-collapse.collapse
+      %ul.nav.navbar-nav
+        %li{:class => (controller.controller_name=="welcome") ? "active":nil}
+          %a{:href => root_path}
+            %i.glyphicon.glyphicon-home
+        %li{:class => (controller.controller_name=="summaries") ? "active":nil}
+          %a{:href => summary_path}
+            %i.glyphicon.glyphicon-list
+        %li{:class => (controller.controller_name=="categories") ? "active":nil}
+          %a{:href => categories_path}
+            %i.glyphicon.glyphicon-tags
+
+      %ul.nav.navbar-nav.pull-right
+        %li.dropdown
+          %a.dropdown-toggle{:href=>"#", "data-toggle"=>"dropdown"}
+            =current_user.name
+            %b.caret
+          %ul.dropdown-menu
+            %li
+              =link_to "Account", edit_user_registration_path
+            %li
+              =link_to "Logout", destroy_user_session_path, :method => :delete

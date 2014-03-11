@@ -22,7 +22,7 @@
       .container.main-container
         .main-content
           .row
-            .span12#flash-container
+            .col-md-12#flash-container
               .alert#flash-prototype{ style: "display: none;" }
                 %button{:type=>"button",:class=>"close","data-dismiss"=>"alert"}
                   &times;
@@ -44,7 +44,7 @@
                     &times;
                   =flash[:alert]
           .row
-            .span12
+            .col-md-12
               = yield
 
 
