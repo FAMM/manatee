@@ -1,0 +1,7 @@
+en:
+  transactions:
+    overview:
+    index:
+      heading: "%{budget_name}"
+      heading_addition: "All transactions"
+      

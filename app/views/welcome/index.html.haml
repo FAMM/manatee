@@ -16,7 +16,6 @@
           %td= transaction.comment
           %td= transaction.category.name
           %td.currency= formated_currency( transaction.amount )
-    %p= link_to t('common.new', entity: t('activerecord.models.transaction')), new_transaction_path
 
   .col-md-3.hidden-phone#sidebar
     %h3= t('.categories')

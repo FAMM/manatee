@@ -1,10 +1,14 @@
-%h1= t(".heading")
+%h1
+  = t(".heading", :budget_name => @budget.name)
+  %small= t(".heading_addition")
 
 %table.table.table-striped
   %thead
     %tr
       %th
         = t("activerecord.attributes.transaction.comment")
+      %th
+        = t("activerecord.models.category")
       %th
         = t("activerecord.attributes.transaction.ammount")
       %th
@@ -17,9 +21,11 @@
         %td
           =transaction.comment
         %td
+          =transaction.category.name
+        %td
           =transaction.amount
         %td
           =transaction.created_at
 
 %p
-  =link_to t("entities.new", :entity => t("activerecord.models.transaction")  ), new_transaction_path
+  =link_to t("entities.new", :entity => t("activerecord.models.transaction")  ), new_budget_transaction_path(@budget)

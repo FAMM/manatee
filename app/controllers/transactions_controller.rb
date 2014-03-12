@@ -1,12 +1,13 @@
 class TransactionsController < ApplicationController
 
   before_filter :authenticate_user!
+  before_filter :set_budget
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
 
   # GET /transactions
   # GET /transactions.json
   def index
-    @transactions = Transaction.all
+    @transactions = @budget.transactions
   end
 
   # GET /transactions/1
@@ -16,8 +17,8 @@ class TransactionsController < ApplicationController
 
   # GET /transactions/new
   def new
-    @transaction = Transaction.new
-		@transaction.date = Time.now.to_date
+    @transaction = current_user.transactions.new
+    @transaction.budget = @budget
   end
 
   # GET /transactions/1/edit
@@ -27,10 +28,8 @@ class TransactionsController < ApplicationController
   # POST /transactions
   # POST /transactions.json
   def create
-    @transaction = Transaction.new(transaction_params)
-
-    # make the transaction belong to the current user
-		@transaction.user = current_user
+    @transaction = current_user.transactions.new(transaction_params)
+    @transaction.budget=@budget
 
     respond_to do |format|
       if @transaction.save
@@ -68,9 +67,13 @@ class TransactionsController < ApplicationController
   end
 
   private
+
+    def set_budget
+      @budget = current_user.budgets.find(params[:budget_id])
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_transaction
-      @transaction = Transaction.find(params[:id])
+      @transaction = @budget.transactions.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

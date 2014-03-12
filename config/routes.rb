@@ -12,10 +12,9 @@ Manatee::Application.routes.draw do
 
 	resources :filters, only: [:index, :create, :update, :destroy]
 
-  resources :categories
-
   resources :budgets do
     resources :transactions
+    resources :categories
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
