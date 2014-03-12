@@ -7,10 +7,10 @@ Manatee::Application.routes.draw do
       put 'users' => 'devise/registrations#update', :as => 'user_registration'
     end
  
-	# for the filters
-	resource :summary, only: [:show, :create]
+  # for the filters
+  resource :summary, only: [:show, :create]
 
-	resources :filters, only: [:index, :create, :update, :destroy]
+  resources :filters, only: [:index, :create, :update, :destroy]
 
   resources :budgets do
     resources :transactions

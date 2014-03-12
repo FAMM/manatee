@@ -1,13 +1,14 @@
 class BudgetsController < ApplicationController
 
   before_filter :authenticate_user!
-  before_action :set_budget, only: [:show, :edit, :update, :destroy]
+  before_action :set_budget, only: [:edit, :update, :destroy]
   
   def index
-    @budgets = current_user.budgets
+    @budgets = current_user.budgets.includes(:categories).includes(:transactions)
   end
 
   def show
+    @budget = current_user.budgets.includes(:categories).includes(:transactions).find(params[:id])
   end
 
   def new

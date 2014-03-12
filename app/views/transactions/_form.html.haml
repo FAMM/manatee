@@ -1,0 +1,32 @@
+= form_for(@transaction, html: { :class => 'form-horizontal', :role => "form" } ) do |f|
+  - if @transaction.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@transaction.errors.count, "error")} prohibited this transaction from being saved:"
+
+      %ul
+        - @transaction.errors.full_messages.each do |msg|
+          %li= msg
+
+  .form-group
+    = f.label :amount, class: 'control-label col-sm-2'
+    .col-sm-10
+      = f.number_field :amount, class: 'form-control'
+
+  .form-group
+    = f.label :comment, class: 'control-label col-sm-2'
+    .col-sm-10
+      = f.text_field :comment, class: 'form-control'
+
+  .form-group
+    = f.label :category_id, class: 'control-label col-sm-2'
+    .col-sm-10
+      = select( "transaction", "category_id", current_user.categories.all.map{ |c| [ c.name, c.id ] }, { prompt: 'Select a category' }, class: 'form-control' )
+
+  .form-group
+    = f.label :date, class: 'control-label col-sm-2'
+    .col-sm-10
+      = f.date_field :date, class: 'form-control'
+
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit t('common.save'), class: 'btn btn-default'

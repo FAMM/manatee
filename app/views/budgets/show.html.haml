@@ -1,0 +1,23 @@
+%h1.page-header= @budget.name
+
+.row
+  .col-md-9
+    %h3= t('.latest_transactions')
+
+    %table.table
+      %th= t('activerecord.attributes.transaction.comment')
+      %th= t('activerecord.models.category')
+      %th= t('activerecord.attributes.transaction.amount')
+      %th &nbsp;
+
+      - @budget.transactions.each do |transaction|
+        %td= transaction.comment
+        %td= transaction.category.name
+        %td= formated_currency( transaction.amount )
+        %td
+          .pull-right.inline-buttons
+            = button_to t('common.edit'), edit_transaction_path(transaction), method: :get, class: 'btn'
+            = button_to t('common.delete'), transaction, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }
+
+  .col-md-3
+    = render :partial => 'partials/budget_sidebar'

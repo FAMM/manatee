@@ -1,0 +1,11 @@
+%h3= t('.actions')
+  
+.list-group
+  =link_to t('common.new', entity: t('activerecord.models.transaction')), new_transaction_path, class: "list-group-item #{current_page?(new_transaction_path) ? 'active' : ''}"
+  =link_to t('common.new', entity: t('activerecord.models.category')), new_category_path, class: "list-group-item #{current_page?(new_category_path) ? 'active' : ''}"
+.list-group
+  =link_to t('.lastest_transactions'), @budget, class: "list-group-item #{current_page?(budget_path(@budget)) ? 'active' : ''}"
+.list-group
+  =link_to t('.transactions_by_category'), transactions_path, class: "list-group-item #{current_page?(transactions_path) ? 'active' : ''}"
+  =link_to t('.transactions_by_date'), transactions_path, class: "list-group-item #{current_page?(transactions_path) ? 'active' : ''}"
+  =link_to t('.advanced_filtering'), transactions_path, class: "list-group-item #{current_page?(transactions_path) ? 'active' : ''}"
