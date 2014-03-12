@@ -1,7 +1,7 @@
 class Budget < ActiveRecord::Base
   has_and_belongs_to_many :users
   has_many :categories, :dependent => :destroy
-  has_many :transactions, :through => :categories
+  has_many :transactions
 
   attr_accessor :planned, :used_this_month
 

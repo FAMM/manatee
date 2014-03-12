@@ -1,5 +1,7 @@
 class Transaction < ActiveRecord::Base
 	belongs_to :category
+  belongs_to :budget
+
   belongs_to :user
 
 	def self.this_month
