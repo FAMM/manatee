@@ -17,6 +17,9 @@
         %li{:class => (controller.controller_name=="welcome") ? "active":nil}
           %a{:href => root_path}
             %i.glyphicon.glyphicon-home
+        %li{:class => (controller.controller_name=="budgets") ? "active":nil}
+          %a{:href => budgets_path}
+            %i.glyphicon.glyphicon-book
         %li{:class => (controller.controller_name=="categories") ? "active":nil}
           %a{:href => categories_path}
             %i.glyphicon.glyphicon-tags
