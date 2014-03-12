@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :budgets
   has_many :categories, :through => :budgets
-  has_many :transactions, :through => :categories
+  has_many :transactions
 
   has_many :filters, dependent: :delete_all
 

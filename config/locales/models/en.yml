@@ -4,6 +4,7 @@ en:
       user: "User"
       category: "Category"
       transaction: "Transaction"
+      budget: "Budget"
     attributes:
       user:
         name: "Name"
@@ -11,11 +12,13 @@ en:
         admin: "Administrator"
       category:
         name: "Name"
-        budget: "Budget"
+        planed: "Planned"
       transaction:
         comment: "Comment"
         amount: "Amount"
         saldo: "Saldo"
+      budget:
+        name: "Name"
       common:
         id: "ID"
         updated_at: "updated at"

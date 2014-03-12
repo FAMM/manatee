@@ -1,5 +1,6 @@
 class Transaction < ActiveRecord::Base
 	belongs_to :category
+  belongs_to :user
 
 	def self.this_month
 		between( Date.today.beginning_of_month, Date.today.end_of_month )
