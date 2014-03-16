@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20140312020546) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
-    t.decimal  "planed",     precision: 20, scale: 2
+    t.decimal  "planned",    precision: 20, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "budget_id"
