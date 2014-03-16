@@ -1,6 +1,7 @@
 en:
   budgets:
-    overview:
     index:
       heading: "Your budgets"
+    show:
+      heading_addition:  "Overview"
       

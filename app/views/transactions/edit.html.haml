@@ -1,0 +1,9 @@
+%h1.page-header
+  = t("transactions.heading", :budget_name => @budget.name)
+  %small= t(".heading_addition")
+
+= render 'form'
+
+= link_to 'Show', @transaction
+|
+= link_to 'Back', budget_transactions_path(@budget)

@@ -1,0 +1,19 @@
+%h1.page-header
+  = t("transactions.heading", :budget_name => @budget.name)
+  %small= t(".heading_addition")
+
+%p#notice= notice
+
+%p
+  %strong
+    Amount:
+  = @transaction.amount
+
+%p
+  %strong
+    Comment:
+  = @transaction.comment
+
+= link_to 'Edit', edit_budget_transaction_path(@transaction)
+|
+= link_to 'Back', budget_transactions_path(@budget)

@@ -1,6 +1,6 @@
-%h1
-  = t(".heading", :budget_name => @budget.name)
-  %small= t(".heading_addition")
+%h1.page-header
+  = t("transactions.heading", :budget_name => @budget.name)
+  %small= criteria_to_text @filter_critera
 
 .row
   .col-md-9
@@ -15,7 +15,9 @@
             = t("activerecord.attributes.transaction.amount")
           %th
             = t("activerecord.attributes.common.created_at")
-
+          - if @budget.users.count > 1
+            %th
+              = t(".created_by")
 
       %tbody
         -@transactions.each do |transaction|
@@ -28,6 +30,9 @@
               =transaction.amount
             %td
               =transaction.created_at
+          - if @budget.users.count > 1
+            %th
+              =transaction.user.name
 
     %p
       =link_to t("entities.new", :entity => t("activerecord.models.transaction")  ), new_budget_transaction_path(@budget)

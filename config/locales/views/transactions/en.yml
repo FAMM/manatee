@@ -1,7 +1,11 @@
 en:
   transactions:
-    overview:
+    heading: "%{budget_name}"
+    new:
+      heading_addition: "New transaction"
     index:
-      heading: "%{budget_name}"
-      heading_addition: "All transactions"
-      
+      all_transactions: "All transactions"
+      transactions_by_criteria: "Transactions filtered by %{criteria}"
+      custom_filter: "Transactions with custom filter" 
+    show:
+      heading_addition: "View transaction"

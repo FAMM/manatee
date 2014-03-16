@@ -1,4 +1,6 @@
-%h1.page-header= @budget.name
+%h1.page-header
+  = t("transactions.heading", :budget_name => @budget.name)
+  %small= t(".heading_addition")
 
 .row
   .col-md-9
