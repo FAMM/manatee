@@ -16,7 +16,7 @@
         %td= formated_currency( transaction.amount )
         %td
           .pull-right.inline-buttons
-            = button_to t('common.edit'), edit_transaction_path(transaction), method: :get, class: 'btn'
+            = button_to t('common.edit'), edit_budget_transaction_path(transaction), method: :get, class: 'btn'
             = button_to t('common.delete'), transaction, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }
 
   .col-md-3
