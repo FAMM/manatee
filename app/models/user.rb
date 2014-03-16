@@ -10,12 +10,13 @@ class User < ActiveRecord::Base
 
   has_many :filters, dependent: :delete_all
 
+	after_create :create_user_budget
+
   LANGUAGES={"English" => "en", "Deutsch" => "de", "Svenska" => "se"}
 
   # Virtual attribute for authenticating by either username or email
   # This is in addition to a real persisted field like 'username'
   attr_accessor :login
-
 
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
@@ -25,4 +26,12 @@ class User < ActiveRecord::Base
       where(conditions).first
     end
   end
+
+	def create_user_budget
+		budget = self.budgets.create(
+			:name => self.name.capitalize,
+			:description => "Budget for #{self.name}"
+		)
+	end
+
 end
