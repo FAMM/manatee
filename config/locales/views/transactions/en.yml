@@ -1,11 +1,12 @@
 en:
   transactions:
     heading: "%{budget_name}"
+    select_category: "Select a category"
     new:
       heading_addition: "New transaction"
     index:
       all_transactions: "All transactions"
-      transactions_by_criteria: "Transactions filtered by %{criteria}"
-      custom_filter: "Transactions with custom filter" 
+      transactions_by_criteria: "Transactions sorted by %{criteria}"
+      custom_filter: "Transactions with a custom filter" 
     show:
       heading_addition: "View transaction"

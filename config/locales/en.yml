@@ -3,10 +3,10 @@ en:
     new: "New %{entity}"
   common:
     new: "New %{entity}"
+    save: "Save"
     show: "Show"
     edit: "Edit"
     delete: "Delete"
-    saldo: "Saldo"
     sum: "Sum"
     planned: "Bugeted"
     used: "Used"

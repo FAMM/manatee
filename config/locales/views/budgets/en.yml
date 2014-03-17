@@ -1,7 +1,9 @@
 en:
   budgets:
+    transactions: "Transactions"
+    categories: "Categories"
     index:
       heading: "Your budgets"
     show:
-      heading_addition:  "Overview"
+      heading_addition: "Overview"
       

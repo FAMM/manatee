@@ -3,10 +3,14 @@
 .list-group
   =link_to t('common.new', entity: t('activerecord.models.transaction')), new_budget_transaction_path(@budget), class: "list-group-item #{current_page?(new_budget_transaction_path(@budget)) ? 'active' : ''}"
   =link_to t('common.new', entity: t('activerecord.models.category')), new_budget_category_path(@budget), class: "list-group-item #{current_page?(new_budget_category_path(@budget)) ? 'active' : ''}"
+
 .list-group
-  =link_to t('.lastest_transactions'), @budget, class: "list-group-item #{current_page?(budget_path(@budget)) ? 'active' : ''}"
+  =link_to t('budgets.show.heading_addition'), @budget, class: "list-group-item #{current_page?(budget_path(@budget)) ? 'active' : ''}"
+  =link_to t('budgets.transactions'), budget_transactions_path(@budget), class: "list-group-item #{current_page?(budget_transactions_path(@budget)) ? 'active' : ''}"
+  =link_to t('budgets.categories'), budget_categories_path(@budget), class: "list-group-item #{current_page?(budget_categories_path(@budget)) ? 'active' : ''}"
+
 .list-group
-  =link_to t('.transactions_by_category'), budget_transactions_path(@budget), class: "list-group-item #{current_page?(budget_transactions_path(@budget)) ? 'active' : ''}"
-  =link_to t('.transactions_by_date'), budget_transactions_path(@budget), class: "list-group-item #{current_page?(budget_transactions_path(@budget)) ? 'active' : ''}"
-  =link_to t('.transactions_by_user'), budget_transactions_path(@budget), class: "list-group-item #{current_page?(budget_transactions_path(@budget)) ? 'active' : ''}"
-  =link_to t('.advanced_filtering'), budget_transactions_path(@budget), class: "list-group-item #{current_page?(budget_transactions_path(@budget)) ? 'active' : ''}"
+  =link_to t('transactions.index.transactions_by_criteria', :criteria => 'Category'), budget_transactions_path(@budget,{:criteria => 'category'}), class: "list-group-item #{current_page?(budget_transactions_path(@budget,{:criteria => 'category'})) ? 'active' : ''}"
+  =link_to t('transactions.index.transactions_by_criteria', :criteria => 'Date'), budget_transactions_path(@budget,{:criteria => 'date'}), class: "list-group-item #{current_page?(budget_transactions_path(@budget,{:criteria => 'date'})) ? 'active' : ''}"
+  =link_to t('transactions.index.transactions_by_criteria', :criteria => 'User'), budget_transactions_path(@budget,{:criteria => 'user'}), class: "list-group-item #{current_page?(budget_transactions_path(@budget,{:criteria => 'user'})) ? 'active' : ''}"
+  =link_to t('transactions.index.custom_filter'), budget_transactions_path(@budget,{:criteria => 'custom'}), class: "list-group-item #{current_page?(budget_transactions_path(@budget,{:criteria => 'custom'})) ? 'active' : ''}"
