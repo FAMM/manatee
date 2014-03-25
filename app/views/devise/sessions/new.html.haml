@@ -20,5 +20,7 @@
           =f.check_box :remember_me, :class => "form-control"
 
     .form-group
-      =f.submit t("devise.sessions.sign_in_button"), :class => "btn btn-primary btn-large form-control"
-    %p= render "devise/shared/links"
+      .col-sm-offset-4.col-sm-8
+        =f.submit t("devise.sessions.sign_in_button"), :class => "btn btn-primary btn-large form-control"
+    .text-right
+      %p= render "devise/shared/links"

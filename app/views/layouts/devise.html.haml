@@ -4,7 +4,7 @@
     %meta{:charset => "utf-8"}
     %meta{:name => "viewport", :content=> "width=device-width, initial-scale=1.0"}
 
-
+    %link{:href => 'http://fonts.googleapis.com/css?family=Changa+One', :rel=>'stylesheet', :type=>'text/css'}
     = stylesheet_link_tag "devise"
     = csrf_meta_tags
     = javascript_include_tag "application"
@@ -13,7 +13,7 @@
     .container
 
       .box
-        %h1.text-center
+        %h1.text-center.manatee-logo
           =image_tag "manatee.png", :width => "200"
           Manatee
         - if flash[:notice] or flash[:error] or flash[:alert]

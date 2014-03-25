@@ -17,9 +17,13 @@ $gridGutterWidth: 30px !default;
 $gridRowWidth: (12 * $gridColumnWidth) + ($gridGutterWidth * 11) !default;
 @import 'bootstrap';
 
-
 body{
-  background-color: $gray-lighter;
+    background-color: $gray-lighter;
+}
+
+.manatee-logo {
+  font-family: 'Changa One', cursive;
+  color: #5E5E5E;
 }
 
 .container {
