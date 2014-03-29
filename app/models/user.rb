@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
 
   has_many :filters, dependent: :delete_all
 
+  validates :name, :presence => true, :uniqueness => :true
+
 	after_create :create_user_budget
 
   LANGUAGES={"English" => "en", "Deutsch" => "de", "Svenska" => "se"}
@@ -30,7 +32,8 @@ class User < ActiveRecord::Base
 	def create_user_budget
 		budget = self.budgets.create(
 			:name => self.name.capitalize,
-			:description => "Budget for #{self.name}"
+			:description => "Budget for #{self.name}",
+      :single_user => true
 		)
 	end
 
