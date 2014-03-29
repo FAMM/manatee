@@ -1,12 +1,5 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-#
-User.create(
+# Create 2 Users, on is an admin the other one a user (automatically creates user budgets)
+admin,user = User.create(
 	[
 		{
 			name: 'admin',
@@ -24,3 +17,76 @@ User.create(
 		},
 	]
 )
+
+# Create another budget that is shared between both users
+Budget.create(
+    :name => "Shared Budget",
+    :description => "This is a shared Budget between admin and user",
+    :users => User.all
+)
+
+# Create 3 categories for every budget
+Budget.all.each do |budget|
+  3.times do |i|
+    budget.categories.create(
+        :name => "Category #{i+1}",
+        :planned => (i+1)*100
+    )
+  end
+end
+
+#Add some transactions
+admin.budgets.each do |budget|
+  categories = budget.categories
+  budget.transactions.create([
+    {
+        :amount => 10,
+        :comment => "Foo Bar",
+        :date => Date.today,
+        :category => categories.first,
+        :user => admin
+    },
+    {
+        :amount => 69,
+        :comment => "The quick brown fox...",
+        :date => Date.today,
+        :category => categories[1],
+        :user => admin
+    },
+    {
+        :amount => 486,
+        :comment => "unexpected costs",
+        :date => Date.today,
+        :category => categories.last,
+        :user => admin
+    }
+  ])
+end
+
+user.budgets.each do |budget|
+  categories = budget.categories
+  budget.transactions.create([
+    {
+        :amount => 48,
+        :comment => "Foo Bar",
+        :date => Date.today,
+        :category => categories.first,
+        :user => user
+    },
+    {
+        :amount => 10,
+        :comment => "The quick brown fox...",
+        :date => Date.today,
+        :category => categories[1],
+        :user => user
+    },
+    {
+        :amount => 5,
+        :date => Date.today,
+        :category => categories.last,
+        :user => user
+    }
+  ])
+end
+
+

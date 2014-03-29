@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140312020546) do
+ActiveRecord::Schema.define(version: 20140317001901) do
 
   create_table "budgets", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "description"
+    t.boolean  "single_user", default: false
   end
 
   create_table "budgets_users", force: true do |t|
