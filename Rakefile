@@ -4,3 +4,9 @@
 require File.expand_path('../config/application', __FILE__)
 
 Manatee::Application.load_tasks
+
+
+Rake::Task[:test].prerequisites.clear
+task :test => [:spec]
+Rake::Task[:default].prerequisites.clear
+task :default => [:spec]
