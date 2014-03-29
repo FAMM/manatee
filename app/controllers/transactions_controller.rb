@@ -7,7 +7,8 @@ class TransactionsController < ApplicationController
   # GET /transactions
   # GET /transactions.json
   def index
-    @transactions = @budget.transactions
+    transaction_sorter = TransactionSorter.new(params[:sort])
+    @transactions = transaction_sorter.sort(@budget.transactions)
   end
 
   # GET /transactions/1
@@ -67,11 +68,10 @@ class TransactionsController < ApplicationController
   end
 
   private
-
     def set_budget
       @budget = current_user.budgets.find(params[:budget_id])
     end
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_transaction
       @transaction = @budget.transactions.find(params[:id])
     end

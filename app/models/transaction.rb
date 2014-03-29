@@ -4,7 +4,13 @@ class Transaction < ActiveRecord::Base
 
   belongs_to :user
 
-	def self.this_month
+  class << self
+    def sort_columns
+      ["date","category"]
+    end
+  end
+
+  def self.this_month
 		between( Date.today.beginning_of_month, Date.today.end_of_month )
 	end
 
