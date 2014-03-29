@@ -6,7 +6,7 @@ en:
       heading_addition: "New transaction"
     index:
       all_transactions: "All transactions"
-      transactions_by_criteria: "Transactions sorted by %{criteria}"
+      transactions_by_sort: "Transactions sorted by %{sort}"
       custom_filter: "Transactions with a custom filter" 
     show:
       heading_addition: "View transaction"
