@@ -11,7 +11,7 @@ module ApplicationHelper
     link_to(text,path, :class => class_string)
   end
 
-  def nav_pill_link_to(text,path)
+  def nav_tab_link_to(text,path)
     class_string = current_page?(path) ? "active":"inactive"
     content_tag :li, :class => class_string do
       link_to text, path

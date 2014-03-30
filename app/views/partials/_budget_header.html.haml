@@ -1,0 +1,8 @@
+.budget-header
+  %h2
+    = t("transactions.heading", :budget_name => @budget.name)
+    %small Current Month
+  %ul.nav.nav-tabs
+    =nav_tab_link_to t('budgets.show.heading_addition'), @budget
+    =nav_tab_link_to t('budgets.transactions'), budget_transactions_path(@budget)
+    =nav_tab_link_to t('budgets.categories'), budget_categories_path(@budget)

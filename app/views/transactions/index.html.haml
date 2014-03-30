@@ -1,43 +1,17 @@
-%h1.page-header
-  = t("transactions.heading", :budget_name => @budget.name)
-  %small= criteria_to_text @filter_critera
+=render :partial => "partials/budget_header"
 
 .row
   .col-md-9
-    %table.table.table-striped
-      %thead
-        %tr
-          %th
-            = t("activerecord.attributes.transaction.comment")
-          %th
-            = t("activerecord.models.category")
-          %th
-            = t("activerecord.attributes.transaction.amount")
-          %th
-            = t("activerecord.attributes.common.created_at")
-          %th
-            = t(".created_by")
+    .text-right
+      %strong= formated_currency(@budget.used_this_month)
+    =render :partial => "transactions/list", :locals => {:transactions => @transactions}
 
-      %tbody
-        -@transactions.each do |transaction|
-          %tr
-            %td
-              =transaction.comment
-            %td
-              =transaction.category.name
-            %td
-              =transaction.amount
-            %td
-              =transaction.created_at
-            -if @budget.users.count > 1
-              %td
-                =transaction.user.name
 
-    %p
-      =link_to t("entities.new", :entity => t("activerecord.models.transaction")  ), new_budget_transaction_path(@budget)
 
   .col-md-3
-    = render :partial => 'partials/budget_sidebar'
+    %h4= t("sidebar.categories")
+    =render :partial => "categories/legend", :locals => {:categories => @budget.categories}
+
     %h4= t("sidebar.sort_options")
     .list-group
       =action_bar_link_to t('transactions.index.transactions_by_sort', :sort => 'Category'), budget_transactions_path(@budget,{:sort => 'category'})

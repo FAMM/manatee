@@ -1,27 +1,9 @@
-%h1.page-header
-  = t("transactions.heading", :budget_name => @budget.name)
-  %small= t(".heading_addition")
+=render :partial => "partials/budget_header"
 
 .row
   .col-md-9
     %h3= t('.latest_transactions')
-
-    %table.table
-      %tr
-        %th= t('activerecord.attributes.transaction.comment')
-        %th= t('activerecord.models.category')
-        %th= t('activerecord.attributes.transaction.amount')
-        %th &nbsp;
-
-      -@budget.transactions.each do |transaction|
-        %tr
-          %td= transaction.comment
-          %td= transaction.category.name
-          %td= formated_currency( transaction.amount )
-          %td
-            .pull-right.inline-buttons
-              = button_to t('common.edit'), edit_budget_transaction_path(@budget,transaction), method: :get, class: 'btn'
-              = button_to t('common.delete'), budget_transaction_path(@budget,transaction), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }
+    =render :partial => "transactions/list", :locals => {:transactions => @budget.transactions.last(10)}
 
   .col-md-3
-    = render :partial => 'partials/budget_sidebar'
+    //= render :partial => 'partials/budget_sidebar'
