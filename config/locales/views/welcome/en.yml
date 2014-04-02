@@ -1,6 +1,7 @@
 en:
   welcome:
     index:
+      heading: "Dashboard"
       welcome_unknown: "Welcome stranger!"
       description_unknown: "This application wants to help you to keep track of your expenses. Your discipline might even be rewarded with some more money at the end of the month..."
       welcome_user: "Welcome %{user}!"
