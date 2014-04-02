@@ -6,11 +6,23 @@ class Budget < ActiveRecord::Base
   attr_accessor :planned, :used_this_month
 
   def used_this_month
-    @used_this_month ||= planned*rand
+    used = 0.0
+
+		self.categories.each do |category|
+			used += category.used_this_month
+		end
+		
+		used
   end
 
   def planned
-    @planned ||= rand*1000.to_i
+    planned = 0.0
+
+		self.categories.each do |category|
+			planned += category.planned
+		end
+		
+		planned
   end
 
   def saldo
