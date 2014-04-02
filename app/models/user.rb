@@ -5,7 +5,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :recoverable, :rememberable, :trackable
 
   has_and_belongs_to_many :budgets
-  has_many :categories, :through => :budgets
   has_many :transactions
 
   has_many :filters, dependent: :delete_all

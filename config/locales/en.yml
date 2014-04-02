@@ -4,6 +4,7 @@ en:
   common:
     new: "New %{entity}"
     save: "Save"
+    save_and_add: Save and continue
     show: "Show"
     edit: "Edit"
     delete: "Delete"
