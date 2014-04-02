@@ -7,6 +7,9 @@
 #= require lib/bootstrap-growl.min.js
 #= require_tree .
 
+$(document).ready () ->
+  $(".has-tooltip").tooltip()
+
 $(document).on "mouseover","tr.with-options", (event) ->
   $(this).find(".options").removeClass("hidden");
 
