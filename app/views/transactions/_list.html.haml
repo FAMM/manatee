@@ -4,12 +4,12 @@
       %td.small-column.text-muted
         = l(transaction.date, :format => :short)
 
-      -unless @budget.single_user?
+      -unless transaction.budget.single_user?
         %td.small-column
           =transaction.user.name
 
       %td
         = category_box(transaction.category,transaction.comment)
 
-      %td.text-right
+      %td.small-column.text-right
         = formated_currency transaction.amount
