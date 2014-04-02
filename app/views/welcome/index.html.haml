@@ -3,14 +3,17 @@
     - budgets.each do |budget|
       .col-md-6.budget-summary
         - if budget
-          %h3
-            = link_to budget.name, budget
-            .small
-              = "#{formated_currency(budget.used_this_month)} / #{formated_currency(budget.planned)}".html_safe
-          .progress.budget_bar
-            .progress-bar-info.progress-bar{:role => "progressbar", :aria => {:valuemin => 0, :valuemax => budget.planned.to_i, :valuenow => budget.used_this_month.to_i}, :style => "width: #{used_in_percent(budget.used_this_month, budget.planned)}%"}
-          .budget-description.text-muted
-            = budget.description
-          .budget-transactions
-            %h4= t('.latest_transactions')
-            = render :partial => "transactions/list", :locals => { :transactions => budget.transactions.order('date desc').limit(3), :budget => budget }
+          .panel.panel-default
+            .panel-body
+              .col-md-10.col-md-offset-1
+              %h3
+                = link_to budget.name, budget
+                .small
+                  = "#{formated_currency(budget.used_this_month)} / #{formated_currency(budget.planned)}".html_safe
+              .progress.budget_bar
+                .progress-bar-info.progress-bar{:role => "progressbar", :aria => {:valuemin => 0, :valuemax => budget.planned.to_i, :valuenow => budget.used_this_month.to_i}, :style => "width: #{used_in_percent(budget.used_this_month, budget.planned)}%"}
+              .budget-description.text-muted
+                = budget.description
+              .budget-transactions
+                %h4= t('.latest_transactions')
+                = render :partial => "transactions/list", :locals => { :transactions => budget.transactions.order('date desc').limit(3), :budget => budget }
