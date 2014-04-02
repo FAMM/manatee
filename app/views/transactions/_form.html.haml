@@ -18,14 +18,15 @@
       = f.text_field :comment, class: 'form-control'
 
   .form-group
+    = f.label :date, class: 'control-label col-sm-2'
+    .col-sm-10
+      = f.date_field :date, class: 'form-control'
+
+  .form-group
     = f.label :category_id, class: 'control-label col-sm-2'
     .col-sm-10
       = select( "transaction", "category_id", @budget.categories.all.map{ |c| [ c.name, c.id ] }, { prompt: t('transactions.select_category') }, class: 'form-control' )
 
-  .form-group
-    = f.label :date, class: 'control-label col-sm-2'
-    .col-sm-10
-      = f.date_field :date, class: 'form-control'
 
   .form-group
     .col-sm-offset-2.col-sm-10

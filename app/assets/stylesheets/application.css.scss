@@ -10,6 +10,7 @@
  *
  *= require_self
  *= require_directory ./application
+ *= require lib/datepicker
  */
 
 $gridColumnWidth: 70px !default;
