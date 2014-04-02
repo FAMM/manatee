@@ -1,3 +1,14 @@
 // Place all the styles related to the Welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.dashboard {
+	.panel-body {
+    padding-top: 0px;
+    padding-bottom: 0px;
+	}
+  .budget-description {
+    margin-top: -1em;
+		margin-bottom: 1em;
+	}
+}

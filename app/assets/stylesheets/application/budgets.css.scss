@@ -18,12 +18,20 @@
   }
 }
 
-
 .progress.budget_bar {
   height: 30px;
 
   .progress-bar {
     line-height: 30px;
     font-size: 20px !important;
+  }
+}
+
+.progress.budget_bar-slim {
+  height: 15px;
+
+  .progress-bar {
+    line-height: 15px;
+    font-size: 10px !important;
   }
 }

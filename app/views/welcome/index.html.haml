@@ -1,7 +1,7 @@
 - @budgets.in_groups_of(2) do |budgets|
   .row
     - budgets.each do |budget|
-      .col-md-6.budget-summary
+      .col-md-6.budget-summary.dashboard
         - if budget
           .panel.panel-default
             .panel-body
@@ -10,7 +10,7 @@
                 = link_to budget.name, budget
                 .small
                   = "#{formated_currency(budget.used_this_month)} / #{formated_currency(budget.planned)}".html_safe
-              .progress.budget_bar
+              .progress.budget_bar-slim
                 .progress-bar-info.progress-bar{:role => "progressbar", :aria => {:valuemin => 0, :valuemax => budget.planned.to_i, :valuenow => budget.used_this_month.to_i}, :style => "width: #{used_in_percent(budget.used_this_month, budget.planned)}%"}
               .budget-description.text-muted
                 = budget.description
