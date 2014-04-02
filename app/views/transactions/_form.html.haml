@@ -31,4 +31,5 @@
   .form-group
     .col-sm-offset-2.col-sm-10
       = f.submit t('common.save'), class: 'btn btn-default'
-      = f.submit t('common.save_and_add'), :class => 'btn btn-default', :name => "continue"
+      = f.submit t('common.save_and_add'), :class => 'btn btn-default', :name => "continue" if action_name == "new"
+      = link_to "Cancel", budget_transactions_path(@budget), :class => "btn btn-warning"
