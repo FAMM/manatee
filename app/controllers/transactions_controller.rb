@@ -11,11 +11,6 @@ class TransactionsController < ApplicationController
     @transactions = transaction_sorter.sort(@budget.transactions)
   end
 
-  # GET /transactions/1
-  # GET /transactions/1.json
-  def show
-  end
-
   # GET /transactions/new
   def new
     @transaction = current_user.transactions.new
@@ -34,8 +29,10 @@ class TransactionsController < ApplicationController
 
     respond_to do |format|
       if @transaction.save
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @transaction }
+        redirect_path = params[:continue] ? new_budget_transaction_url(@budget) : budget_transactions_url(@budget)
+
+        format.html { redirect_to redirect_path, notice: 'Transaction was successfully created.' }
+        format.json { render :json => @transaction, status: :created, location: @transaction }
       else
         format.html { render action: 'new' }
         format.json { render json: @transaction.errors, status: :unprocessable_entity }

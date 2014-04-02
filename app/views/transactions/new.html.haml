@@ -1,10 +1,5 @@
-%h1.page-header
-  = t("transactions.heading", :budget_name => @budget.name)
-  %small= t(".heading_addition")
+=render :partial => "partials/budget_header", :locals => { :action => "New Transaction" }
 
 .row
   .col-md-9
     = render :partial => 'form'
-
-  .col-md-3
-    = render :partial => 'partials/budget_sidebar'
