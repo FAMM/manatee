@@ -60,10 +60,16 @@ class TransactionsController < ApplicationController
   # DELETE /transactions/1
   # DELETE /transactions/1.json
   def destroy
-    @transaction.destroy
-    respond_to do |format|
-      format.html { redirect_to transactions_url }
-      format.json { head :no_content }
+    if current_user == @transaction.user || current_user.admin?
+      @transaction.destroy
+      respond_to do |format|
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to @transaction, :alert => t("errors.messages.not_allowed") }
+        format.json { render :json => t("errors.messages.not_allowed"), :status => :forbidden }
+      end
     end
   end
 

@@ -1,6 +1,6 @@
 %table.table.table-striped
   -transactions.each do |transaction|
-    %tr
+    %tr.with-options
       %td.small-column.text-muted
         = l(transaction.date, :format => :short)
 
@@ -11,5 +11,13 @@
       %td
         = category_box(transaction.category,transaction.comment)
 
-      %td.text-right
+      %td.small-column.text-right{:style => "min-width:30px"}
+        %span.options.hidden
+          =link_to edit_budget_transaction_path(@budget,transaction) do
+            %i.glyphicon.glyphicon-pencil
+          =link_to "javascript:void(0)", :class => "transaction-remove-link", :data => { :id => transaction.id, :budget => @budget.id } do
+            %i.glyphicon.glyphicon-remove
+
+
+      %td.small-column.text-right
         = formated_currency transaction.amount
