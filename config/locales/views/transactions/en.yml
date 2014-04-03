@@ -2,6 +2,8 @@ en:
   transactions:
     heading: "%{budget_name}"
     select_category: "Select a category"
+    list:
+      no_transactions: "Sorry, no transactions matching the criteria found"
     new:
       heading_addition: "New transaction"
     index:

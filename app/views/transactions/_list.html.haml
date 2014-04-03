@@ -20,3 +20,8 @@
 
       %td.small-column.text-right
         = formated_currency transaction.amount
+
+  - if transactions.empty?
+    %tr
+      %td.text-muted
+        = t('.no_transactions')
