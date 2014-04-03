@@ -13,7 +13,7 @@
                 .small.pull-right
                   = "#{formated_currency(budget.used_this_month)} / #{formated_currency(budget.planned)}".html_safe
               .progress.budget_bar-slim
-                = budgetbar(budget)
+                = budgetbar(budget,true)
               .budget-description.text-muted
                 = budget.description
               .budget-transactions
