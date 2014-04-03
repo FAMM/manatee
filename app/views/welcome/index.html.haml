@@ -10,10 +10,10 @@
               .col-md-10.col-md-offset-1
               %h3
                 = link_to budget.name, budget
-                .small
+                .small.pull-right
                   = "#{formated_currency(budget.used_this_month)} / #{formated_currency(budget.planned)}".html_safe
               .progress.budget_bar-slim
-                .progress-bar-info.progress-bar{:role => "progressbar", :aria => {:valuemin => 0, :valuemax => budget.planned.to_i, :valuenow => budget.used_this_month.to_i}, :style => "width: #{used_in_percent(budget.used_this_month, budget.planned)}%"}
+                = budgetbar(budget)
               .budget-description.text-muted
                 = budget.description
               .budget-transactions

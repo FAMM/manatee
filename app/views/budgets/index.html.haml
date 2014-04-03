@@ -1,6 +1,5 @@
 %h1.page-header= t(".heading")
 
-
 .budgets
   -@budgets.each do |budget|
     .row.budget-summary
@@ -11,7 +10,7 @@
 
       .col-md-8
         .progress.budget_bar
-          .progress-bar-info.progress-bar{:role => "progressbar", :aria => {:valuemin => 0, :valuemax => budget.planned.to_i, :valuenow => budget.used_this_month.to_i}, :style => "width: #{used_in_percent(budget.used_this_month, budget.planned)}%"}
+          = budgetbar(budget,true) do
             .hidden-xs.hidden-sm= formated_currency(budget.used_this_month)
             .visible-xs.visible-sm= "#{formated_currency(budget.used_this_month)} / #{formated_currency(budget.planned)}".html_safe
         .budget-description= budget.description
