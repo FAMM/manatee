@@ -26,6 +26,11 @@
     = f.label :category_id, class: 'control-label col-sm-2'
     .col-sm-10
       = select( "transaction", "category_id", @budget.categories.all.map{ |c| [ c.name, c.id ] }, { prompt: t('transactions.select_category') }, class: 'form-control' )
+  
+  .form-group
+    = f.label :budget_id, class: 'control-label col-sm-2'
+    .col-sm-10
+      = select( "transaction", "budget_id", @transaction.user.budgets.all.map{ |b| [ b.name, b.id ] }, {}, { class: 'form-control', @transaction.user == current_user ? nil : :disabled => 'disabled' } )
 
 
   .form-group
