@@ -26,12 +26,7 @@ class Budget < ActiveRecord::Base
   end
 
   def saldo
-    -1
-  end
-
-
-  def saldo_in_percent
-    -1
+    self.planned - self.used_this_month
   end
 end
 

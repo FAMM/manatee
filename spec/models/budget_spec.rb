@@ -26,4 +26,17 @@ describe 'Budget' do
    		
 		expect(@budget.used_this_month).to eq(transaction1.amount + transaction2.amount + transaction3.amount)
 	end
+	
+	it "has the difference between planned and used_this_month as saldo" do
+		category1 = FactoryGirl.create(:category, :name => "Category 1", :planned => 100, :budget => @budget)
+		category2 = FactoryGirl.create(:category, :name => "Category 2", :planned => 200, :budget => @budget)
+		category3 = FactoryGirl.create(:category, :name => "Category 3", :planned => 300, :budget => @budget)
+		
+		transaction1 = FactoryGirl.create(:transaction, :comment => 'Transaction 1', :amount => 10, :category => category1)
+ 		transaction2 = FactoryGirl.create(:transaction, :comment => 'Transaction 2', :amount => 20, :category => category2)
+ 		transaction3 = FactoryGirl.create(:transaction, :comment => 'Transaction 3', :amount => 30, :category => category3)
+ 		transaction4 = FactoryGirl.create(:transaction, :comment => 'Transaction 4', :amount => 40, :date => ( Time.now - 2.months ), :category => category1)
+   		
+		expect(@budget.saldo).to eq(@budget.planned - @budget.used_this_month)
+	end
 end
