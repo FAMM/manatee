@@ -1,0 +1,40 @@
+= form_for(@budget, html: { :class => 'form-horizontal', :role => "form" } ) do |f|
+  - if @budget.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@budget.errors.count, "error")} prohibited this budget from being saved:"
+
+      %ul
+        - @budget.errors.full_messages.each do |msg|
+          %li= msg
+
+  .form-group
+    = f.label :name, class: 'control-label col-sm-2'
+    .col-sm-10
+      = f.text_field :name, class: 'form-control'
+
+  .form-group
+    = f.label :description, class: 'control-label col-sm-2'
+    .col-sm-10
+      = f.text_area :description, class: 'form-control'
+
+  -unless @budget.single_user?
+    .form-group
+      = f.label :users, class: 'control-label col-sm-2'
+      .col-sm-10
+        =f.hidden_field :user_id_list
+
+        .user-badges
+          -@budget.users.each do |user|
+            %span.badge
+              = user.name
+              = link_to "javascript:void(0)", :class => "budget-user-remove-link", :data => {:user => user.id} do
+                %i.glyphicon.glyphicon-remove
+
+        .add-user-field
+          =text_field_tag "new_user_identifier"
+          %button{:type => 'button', :class => "btn btn-default", :id => "add-budget-user-button"} Add User
+
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit t('common.save'), class: 'btn btn-default'
+      = link_to "Cancel", budget_path(@budget), :class => "btn btn-warning"

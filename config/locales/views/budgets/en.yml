@@ -1,7 +1,9 @@
 en:
   budgets:
     transactions: "Transactions"
+    new_transaction: "New Transaction"
     categories: "Categories"
+    manage_budget: "Manage"
     index:
       heading: "Your budgets"
     show:

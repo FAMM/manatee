@@ -19,3 +19,15 @@ $(document).on "mouseover","tr.with-options", (event) ->
 
 $(document).on "mouseout","tr.with-options", (event) ->
   $(this).find(".options").addClass("hidden");
+
+
+
+window.show_error_message= (text) ->
+  $.bootstrapGrowl(text, {
+    type: 'danger',
+    ele: ".main-content"
+    align: 'center',
+    offset:
+      from: 'bottom',
+      amount: 60
+  })

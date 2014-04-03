@@ -5,6 +5,8 @@ class Budget < ActiveRecord::Base
 
   attr_accessor :planned, :used_this_month
 
+  validate :valid_user_count
+
   def used_this_month
     used = 0.0
 
@@ -27,6 +29,26 @@ class Budget < ActiveRecord::Base
 
   def saldo
     self.planned - self.used_this_month
+  end
+
+  def user_id_list
+    users.map(&:id).join(",")
+  end
+
+  def user_id_list=(list)
+    self.users = User.where(:id => list.split(','))
+  end
+
+
+  private
+
+  def valid_user_count
+    if single_user?
+      errors.add(:base, :too_many_users) if user_ids.count != 1
+    else
+      errors.add(:base, :too_few_users) if user_ids.count < 1
+    end
+    false
   end
 end
 

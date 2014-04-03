@@ -7,5 +7,6 @@
   %ul.nav.nav-tabs
     =nav_tab_link_to t('budgets.show.heading_addition'), @budget
     =nav_tab_link_to t('budgets.transactions'), budget_transactions_path(@budget)
-    =nav_tab_link_to "New Transaction", new_budget_transaction_path(@budget)
+    =nav_tab_link_to t('budgets.new_transaction'), new_budget_transaction_path(@budget)
     =nav_tab_link_to t('budgets.categories'), budget_categories_path(@budget)
+    =nav_tab_link_to t('budgets.manage_budget'), edit_budget_path(@budget)

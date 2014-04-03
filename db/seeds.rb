@@ -18,6 +18,8 @@ admin,user = User.create(
 	]
 )
 
+
+
 # Create another budget that is shared between both users
 Budget.create(
     :name => "Shared Budget",
