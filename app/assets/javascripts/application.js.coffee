@@ -11,7 +11,7 @@
 $(document).ready () ->
   $(".has-tooltip").tooltip()
   $("input[type=date]").datepicker({
-    format: "mm-dd-yy"
+    format: "yyyy-mm-dd"
   })
 
 $(document).on "mouseover","tr.with-options", (event) ->

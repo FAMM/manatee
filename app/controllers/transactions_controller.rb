@@ -1,8 +1,8 @@
 class TransactionsController < ApplicationController
 
   before_filter :authenticate_user!
-  before_filter :set_budget
-  before_action :set_transaction, only: [:show, :edit, :update, :destroy]
+  before_action :set_budget
+  before_action :set_transaction, only: [:edit, :update, :destroy]
 
   # GET /transactions
   # GET /transactions.json
@@ -45,8 +45,8 @@ class TransactionsController < ApplicationController
   def update
     respond_to do |format|
       if @transaction.update(transaction_params)
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully updated.' }
-        format.json { head :no_content }
+        format.html { redirect_to budget_transactions_url(@budget), notice: 'Transaction was successfully updated.' }
+        format.json { render :json => @transaction }
       else
         format.html { render action: 'edit' }
         format.json { render json: @transaction.errors, status: :unprocessable_entity }
