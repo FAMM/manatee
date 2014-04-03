@@ -3,7 +3,7 @@
 .row
   .col-md-9
     %h3= t('.latest_transactions')
-    =render :partial => "transactions/list", :locals => {:transactions => @budget.transactions.last(10)}
+    =render :partial => "transactions/list", :locals => {:transactions => @budget.transactions.this_month.order('date desc').limit(10)}
 
   .col-md-3
     //= render :partial => 'partials/budget_sidebar'

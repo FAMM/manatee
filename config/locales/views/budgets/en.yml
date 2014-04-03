@@ -6,4 +6,5 @@ en:
       heading: "Your budgets"
     show:
       heading_addition: "Overview"
+      latest_transactions: "Latest transactions this month"
       
