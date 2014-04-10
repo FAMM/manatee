@@ -7,8 +7,8 @@ class TransactionsController < ApplicationController
   # GET /transactions
   # GET /transactions.json
   def index
-    transaction_sorter = TransactionSorter.new(params[:sort])
-    @transactions = transaction_sorter.sort(@budget.transactions)
+    transaction_finder = TransactionFinder.new(@budget,params[:categories],params[:sort])
+    @transactions = transaction_finder.transactions
   end
 
   # GET /transactions/new
