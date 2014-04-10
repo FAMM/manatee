@@ -9,6 +9,7 @@ class BudgetsController < ApplicationController
 
   def show
     @budget = current_user.budgets.includes(:categories).includes(:transactions).find(params[:id])
+    @statistics = BudgetStatistics.new(@budget)
   end
 
   def new

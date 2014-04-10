@@ -7,3 +7,21 @@
 
   .col-md-3
     //= render :partial => 'partials/budget_sidebar'
+
+.row
+  .col-md-6
+    %h3 Budget Distribution
+    .row
+      .col-md-7
+        %canvas#category-distribution{width: '300', height: '300'}
+      .col-md-5
+        .list-group
+          -@budget.categories.all.each do |category|
+            .list-group-item= category_box(category, "#{formated_currency(category.used_this_month)}".html_safe)
+
+
+
+
+
+:javascript
+  category_distribution_chart('#category-distribution',#{@statistics.category_distribution.to_json})

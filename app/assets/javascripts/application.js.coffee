@@ -4,8 +4,6 @@
 #= require jquery.turbolinks
 #= require turbolinks
 #= require bootstrap
-#= require lib/bootstrap-growl.min.js
-#= require lib/bootstrap-datepicker.js
 #= require_tree .
 
 $(document).ready () ->
