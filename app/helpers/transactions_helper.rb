@@ -13,8 +13,9 @@ module TransactionsHelper
   def category_filter_link(category)
     categories = params[:categories].instance_of?(Array) ? params[:categories] : []
     selected= categories.include?(category.id.to_s)
+    parameter = params.except(:categories)
 
-    link = selected ? params.except(:categories).merge(:categories => categories - [category.id.to_s]) : params.except(:categories).merge(:categories => categories << category.id)
+    link = selected ? parameter.merge(:categories => categories - [category.id.to_s]) : parameter.merge(:categories => categories + [category.id])
 
     content = category_box(category,category.name)
     content += content_tag(:i,"", :class => "glyphicon glyphicon-ok pull-right") if selected

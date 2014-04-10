@@ -23,6 +23,6 @@
 
     %h4= t("sidebar.sort_options")
     .list-group
-      =action_bar_link_to t('transactions.index.transactions_by_sort', :sort => 'Category'), budget_transactions_path(@budget,{:sort => 'category'})
-      =action_bar_link_to t('transactions.index.transactions_by_sort', :sort => 'Date'), budget_transactions_path(@budget,{:sort => 'date'})
-      =action_bar_link_to t('transactions.index.transactions_by_sort', :sort => 'User'), budget_transactions_path(@budget,{:sort => 'user'}) unless @budget.single_user?
+      =action_bar_link_to t('transactions.index.transactions_by_sort', :sort => 'Category'), budget_transactions_path(@budget,params.merge(:sort => 'category'))
+      =action_bar_link_to t('transactions.index.transactions_by_sort', :sort => 'Date'), budget_transactions_path(@budget,params.merge(:sort => 'date'))
+      =action_bar_link_to t('transactions.index.transactions_by_sort', :sort => 'User'), budget_transactions_path(@budget,params.merge(:sort => 'user')) unless @budget.single_user?
