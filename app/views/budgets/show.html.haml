@@ -1,4 +1,9 @@
 =render :partial => "partials/budget_header"
+.row
+  .col-md-12
+    .progress.budget_bar
+      = budgetbar(@budget,true) do
+        =formated_currency(@budget.used_this_month)
 
 .row
   .col-md-9
