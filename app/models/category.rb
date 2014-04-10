@@ -11,12 +11,6 @@ class Category < ActiveRecord::Base
 	end
 
 	def used_this_month
-		used = 0.0
-
-		self.transactions.this_month.each do |transaction|
-			used += transaction.amount
-		end
-
-		used
+    transactions.this_month.sum(:amount)
 	end
 end

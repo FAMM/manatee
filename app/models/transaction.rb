@@ -10,9 +10,7 @@ class Transaction < ActiveRecord::Base
     end
   end
 
-  def self.this_month
-		between( Date.today.beginning_of_month, Date.today.end_of_month )
-	end
+  scope :this_month, -> { where(date: Date.today.beginning_of_month..Date.today.end_of_month) }
 
 	def self.between start_date, end_date
 		where( date: start_date..end_date )
