@@ -10,7 +10,16 @@
 
   .col-md-3
     %h4= t("sidebar.categories")
-    =render :partial => "categories/legend", :locals => {:categories => @budget.categories}
+    .list-group
+      =link_to budget_transactions_path(@budget,params.except(:categories)), :class => "list-group-item" do
+        All Categories
+        -unless params[:categories]
+          %i.glyphicon.glyphicon-ok.pull-right
+
+      -@budget.categories.each do |category|
+        =category_filter_link(category)
+
+
 
     %h4= t("sidebar.sort_options")
     .list-group

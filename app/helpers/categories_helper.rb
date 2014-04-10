@@ -1,6 +1,6 @@
 module CategoriesHelper
   def category_box(category,text="")
-    content_tag(:div) do
+    content_tag(:span) do
       box = content_tag(:span,"&nbsp;".html_safe,
                    :class => "badge category_box has-tooltip",
                    :style => "background-color:#{category.color}",

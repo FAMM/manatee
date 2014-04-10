@@ -31,7 +31,7 @@
                 %i.glyphicon.glyphicon-remove
 
         .add-user-field
-          =text_field_tag "new_user_identifier"
+          =text_field_tag "new_user_identifier", "", :placeholder => "Username or Email"
           %button{:type => 'button', :class => "btn btn-default", :id => "add-budget-user-button"} Add User
 
   .form-group

@@ -8,5 +8,17 @@ module TransactionsHelper
 		else
 			t("transactions.index.all_transactions")
 		end
-	end
+  end
+
+  def category_filter_link(category)
+    categories = params[:categories].instance_of?(Array) ? params[:categories] : []
+    selected= categories.include?(category.id.to_s)
+
+    link = selected ? params.except(:categories).merge(:categories => categories - [category.id.to_s]) : params.except(:categories).merge(:categories => categories << category.id)
+
+    content = category_box(category,category.name)
+    content += content_tag(:i,"", :class => "glyphicon glyphicon-ok pull-right") if selected
+
+    link_to content.html_safe, link, :class => "list-group-item"
+  end
 end
