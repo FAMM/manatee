@@ -6,13 +6,12 @@
 $(document).on 'click', '.transaction-remove-link', (event) ->
   id=$(this).attr("data-id")
   budget=$(this).attr("data-budget")
-  tr = $(this).closest("tr")
   $.ajax "/budgets/"+budget+"/transactions/"+id,{
     cache:false
     ,dataType: "json"
     ,type: 'DELETE'
     ,success: (result) ->
-      tr.remove()
+      window.location.reload(true)
     ,error: (result) ->
       console.log result
       $.bootstrapGrowl(result.responseText, {

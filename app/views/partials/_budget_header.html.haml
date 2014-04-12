@@ -4,7 +4,14 @@
   %h2
     = t("transactions.heading", :budget_name => @budget.name)
     %small= action unless action.blank?
-  %ul.nav.nav-tabs
+
+  .row
+    .col-md-12
+      .progress.budget_bar
+        = budgetbar(@budget,true) do
+          =formated_currency(@budget.used_this_month)
+
+  %ul.nav.nav-tabs.nav-justified
     =nav_tab_link_to t('budgets.show.heading_addition'), @budget
     =nav_tab_link_to t('budgets.transactions'), budget_transactions_path(@budget)
     =nav_tab_link_to t('budgets.new_transaction'), new_budget_transaction_path(@budget)

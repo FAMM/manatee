@@ -2,9 +2,7 @@
 
 .row
   .col-md-9
-    .text-right
-      %strong= formated_currency(@budget.used_this_month)
-    =render :partial => "transactions/list", :locals => {:transactions => @transactions}
+    =render :partial => "transactions/list_small", :locals => {:transactions => @transactions}
 
 
 

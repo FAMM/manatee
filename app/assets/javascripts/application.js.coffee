@@ -12,10 +12,10 @@ $(document).ready () ->
     format: "yyyy-mm-dd"
   })
 
-$(document).on "mouseover","tr.with-options", (event) ->
+$(document).on "mouseover",".with-options", (event) ->
   $(this).find(".options").removeClass("hidden");
 
-$(document).on "mouseout","tr.with-options", (event) ->
+$(document).on "mouseout",".with-options", (event) ->
   $(this).find(".options").addClass("hidden");
 
 

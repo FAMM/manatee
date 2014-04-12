@@ -18,4 +18,4 @@
                 = budget.description
               .budget-transactions
                 %h4= t('.latest_transactions')
-                = render :partial => "transactions/list", :locals => { :transactions => budget.transactions.this_month.order('date desc').limit(3) }
+                = render :partial => "transactions/list_small", :locals => { :transactions => budget.transactions.this_month.order('date desc').limit(3) }

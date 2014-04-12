@@ -1,5 +1,18 @@
-table {
-  td.small-column {
-    max-width:40px;
+@import "bootstrap/variables";
+
+.transaction-list {
+  margin: 20px 15px 20px 15px;
+
+  .transaction {
+    padding-top:5px;
+    padding-bottom: 10px;
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-top-color: $table-border-color;
+
+  }
+
+  .transaction:nth-child(2n-1) {
+    background-color: $table-bg-accent;
   }
 }

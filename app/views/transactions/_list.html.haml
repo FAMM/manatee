@@ -1,27 +1,24 @@
-%table.table.table-striped
+.transaction-list
   -transactions.each do |transaction|
-    %tr.with-options
-      %td.small-column.text-muted
+    .row.transaction.with-options
+      .col-md-1.col-xs-2.text-muted
         = l(transaction.date, :format => :short)
 
-      -unless transaction.budget.single_user?
-        %td.small-column
-          =transaction.user.name
+      .col-md-1.col-xs-2
+        = transaction.user.name
 
-      %td
+      .col-md-8.col-xs-4
         = category_box(transaction.category,transaction.comment)
 
-      %td.small-column.text-right{:style => "min-width:40px"}
+      .col-md-1.col-xs-2.text-right
         %span.options.hidden
           =link_to edit_budget_transaction_path(transaction.budget,transaction) do
             %i.glyphicon.glyphicon-pencil
           =link_to "javascript:void(0)", :class => "transaction-remove-link", :data => { :id => transaction.id, :budget => transaction.budget.id } do
             %i.glyphicon.glyphicon-remove
 
-      %td.small-column.text-right
+      .col-md-1.col-xs-2.text-right
         = formated_currency transaction.amount
 
-  - if transactions.empty?
-    %tr
-      %td.text-muted
-        = t('.no_transactions')
+- if transactions.empty?
+  .text-muted= t('.no_transactions')
