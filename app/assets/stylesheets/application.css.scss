@@ -29,21 +29,9 @@ html,body  {
 
 .main-container {
   padding-top:60px;
-
-  .main-content {
-
-  }
 }
 
-@media (max-width:767px) {
-  .main-container {
-    padding-top: 10px;
-    .main-content {
-      margin-top: 0px;
-      padding-top:5px;
-    }
-  }
-}
+
 
 
 #wrap {
@@ -96,4 +84,21 @@ footer  {
   font-family: 'Changa One', cursive;
 }
 
+
+@media (max-width:767px) {
+  .main-container {
+    padding-top: 50px;
+    .main-content {
+      margin-top: 0px;
+      padding-top:5px;
+    }
+  }
+
+  footer {
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
 
