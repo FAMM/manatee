@@ -1,32 +1,33 @@
 =render :partial => "partials/budget_header"
-.row
-  .col-md-12
-    .progress.budget_bar
-      = budgetbar(@budget,true) do
-        =formated_currency(@budget.used_this_month)
 
-.row
-  .col-md-9
-    %h3= t('.latest_transactions')
-    =render :partial => "transactions/list", :locals => {:transactions => @budget.transactions.this_month.order('date desc').limit(10)}
+%h3= t('.latest_transactions')
+=render :partial => "transactions/list", :locals => {:transactions => @budget.transactions.this_month.order('date desc').limit(6)}
 
-  .col-md-3
-    //= render :partial => 'partials/budget_sidebar'
 
 .row
   .col-md-6
-    %h3 Budget Distribution
-    .row
-      .col-md-7
-        %canvas#category-distribution{width: '300', height: '300'}
-      .col-md-5
-        .list-group
-          -@budget.categories.all.each do |category|
-            .list-group-item= category_box(category, "#{formated_currency(category.used_this_month)}".html_safe)
+    .panel.panel-default
+      .panel-heading
+        %h3.panel-title Budget distribution
+      .panel-body
+        .row
+          .col-md-7
+            %canvas#category-distribution{width: '300', height: '300'}
+          .col-md-5
+            .list-group
+              -@budget.categories.all.each do |category|
+                .list-group-item= category_box(category, "#{formated_currency(category.used_this_month)}".html_safe)
 
+  .col-md-6
+    .panel.panel-default
+      .panel-heading
+        %h3.panel-title Monthly trend
+      .panel-body
+        %canvas#monthly-trend{width:500, height: 300}
 
 
 
 
 :javascript
-  category_distribution_chart('#category-distribution',#{@statistics.category_distribution.to_json})
+  responsive_chart('Doughnut','#category-distribution',#{@statistics.category_distribution.to_json})
+  responsive_chart('Line','#monthly-trend',#{@statistics.monthly_trend.to_json})
