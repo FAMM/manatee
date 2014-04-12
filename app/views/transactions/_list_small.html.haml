@@ -1,0 +1,17 @@
+.transaction-list
+  -transactions.each do |transaction|
+    .row.transaction
+      .col-md-2.col-xs-2.text-muted
+        = l(transaction.date, :format => :short)
+
+      .col-md-2.col-xs-2
+        = transaction.user.name
+
+      .col-md-6.col-xs-5
+        = category_box(transaction.category,transaction.comment)
+
+      .col-md-2.col-xs-3.text-right
+        = formated_currency transaction.amount
+
+- if transactions.empty?
+  .text-muted= t('.no_transactions')
