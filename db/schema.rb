@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20140329231412) do
 
-  create_table "budgets", force: true do |t|
+  create_table "budgets", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -21,14 +21,14 @@ ActiveRecord::Schema.define(version: 20140329231412) do
     t.boolean  "single_user", default: false
   end
 
-  create_table "budgets_users", force: true do |t|
+  create_table "budgets_users", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "budget_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "categories", force: true do |t|
+  create_table "categories", force: :cascade do |t|
     t.string   "name"
     t.decimal  "planned",    precision: 20, scale: 2
     t.datetime "created_at"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20140329231412) do
     t.string   "color"
   end
 
-  create_table "filter_conditions", force: true do |t|
+  create_table "filter_conditions", force: :cascade do |t|
     t.string   "connector"
     t.string   "column"
     t.string   "operator"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 20140329231412) do
     t.datetime "updated_at"
   end
 
-  create_table "filters", force: true do |t|
+  create_table "filters", force: :cascade do |t|
     t.string   "name"
     t.date     "start_date"
     t.date     "end_date"
@@ -56,18 +56,18 @@ ActiveRecord::Schema.define(version: 20140329231412) do
     t.datetime "updated_at"
   end
 
-  create_table "transactions", force: true do |t|
-    t.decimal  "amount",      precision: 20, scale: 2
+  create_table "transactions", force: :cascade do |t|
+    t.decimal  "amount",      precision: 20, scale: 2, default: 0.0
     t.string   "comment"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.date     "date"
     t.integer  "user_id"
     t.integer  "category_id"
     t.integer  "budget_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "name"
     t.boolean  "admin"
     t.datetime "created_at"
