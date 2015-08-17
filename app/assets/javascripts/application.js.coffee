@@ -1,10 +1,11 @@
 #= require jquery
 #= require jquery_ujs
-#= require jquery.ui.effect.all
 #= require jquery.turbolinks
 #= require turbolinks
 #= require bootstrap
 #= require_tree .
+
+#require jquery.ui.effect.all
 
 $(document).ready () ->
   $(".has-tooltip").tooltip()

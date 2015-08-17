@@ -18,6 +18,8 @@ $gridGutterWidth: 30px !default;
 $gridRowWidth: (12 * $gridColumnWidth) + ($gridGutterWidth * 11) !default;
 $navbarBackgroundHighlight: #E2E2E2;
 $navbarBackground: #D2D2D2;
+
+@import "bootstrap-sprockets";
 @import 'bootstrap';
 
 
@@ -101,4 +103,3 @@ footer  {
     padding-right: 20px;
   }
 }
-
