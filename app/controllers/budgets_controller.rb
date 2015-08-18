@@ -46,10 +46,17 @@ class BudgetsController < ApplicationController
   # DELETE /budgets/1
   # DELETE /budgets/1.json
   def destroy
-    @budget.destroy
-    respond_to do |format|
-      format.html { redirect_to budgets_url }
-      format.json { head :no_content }
+    if @budget.single_user?
+      respond_to do |format|
+        format.html { redirect_to @budget, alert: 'You cannot delete your personal budget.'}
+        format.json { head :not_allowed }
+      end
+    else
+      @budget.destroy
+      respond_to do |format|
+        format.html { redirect_to budgets_url }
+        format.json { head :no_content }
+      end
     end
   end
 
