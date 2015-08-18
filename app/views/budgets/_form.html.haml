@@ -41,5 +41,8 @@
   .form-group
     .col-sm-offset-2.col-sm-10
       = f.submit t('common.save'), class: 'btn btn-primary'
-      = link_to t('common.cancel'), budget_path(@budget), class: "btn btn-default"
-      = link_to t('common.delete'), budget_path(@budget), method: "delete", class: "btn btn-danger pull-right", data: { confirm: 'Are you sure?' }
+      -if @budget.new_record?
+        = link_to t('common.cancel'), budgets_path, class: "btn btn-default"
+      -else
+        = link_to t('common.cancel'), budget_path(@budget), class: "btn btn-default"
+        = link_to t('common.delete'), budget_path(@budget), method: "delete", class: "btn btn-danger pull-right", data: { confirm: 'Are you sure?' }

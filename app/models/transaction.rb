@@ -1,9 +1,16 @@
 class Transaction < ActiveRecord::Base
+  belongs_to :user
 	belongs_to :category
   belongs_to :budget
-  belongs_to :user
 
   scope :this_month, -> { where(date: Date.today.beginning_of_month..Date.today.end_of_month) }
+
+  validates :amount, presence: true, numericality: true
+  validates :comment, presence: true
+  validates :date, presence: true
+  validates :user_id, presence: true, numericality: :only_integer
+  validates :category_id, presence: true, numericality: :only_integer
+  validates :budget_id, presence: true, numericality: :only_integer
 
   after_initialize :ensure_default_values
 

@@ -17,3 +17,7 @@
 
       .col-md-2
         .hidden-sm.hidden-xs= formated_currency(budget.planned)
+
+.row
+  .col-md-10.col-md-offset-2
+    =link_to t(:new_budget), new_budget_path, class: "btn btn-primary"

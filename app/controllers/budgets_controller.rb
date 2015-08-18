@@ -14,6 +14,8 @@ class BudgetsController < ApplicationController
 
   def new
     @budget = current_user.budgets.new
+    # rails does not represent the connection between budget and current_user on its own, so lets do it manually
+    @budget.users << current_user
   end
 
   def edit
