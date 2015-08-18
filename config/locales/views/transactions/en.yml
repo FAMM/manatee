@@ -12,3 +12,5 @@ en:
       custom_filter: "Transactions with a custom filter" 
     show:
       heading_addition: "View transaction"
+    form:
+      comment_comment: "Describe the transaction"

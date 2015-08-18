@@ -18,7 +18,7 @@
   .form-group
     = f.label :comment, class: 'control-label col-sm-2'
     .col-sm-10
-      = f.text_field :comment, class: 'form-control'
+      = f.text_field :comment, class: 'form-control', placeholder: t('.comment_comment')
 
   .form-group
     = f.label :date, class: 'control-label col-sm-2'
@@ -28,7 +28,7 @@
   .form-group
     = f.label :category_id, class: 'control-label col-sm-2'
     .col-sm-10
-      = select( "transaction", "category_id", @budget.categories.all.map{ |c| [ c.name, c.id ] }, { prompt: t('transactions.select_category') }, class: 'form-control' )
+      = select( "transaction", "category_id", @budget.categories.all.map{ |c| [ c.name, c.id, { style: "border-left: 1em solid #{c.color};" } ] }, { prompt: t('transactions.select_category') }, class: 'form-control' )
   
   .form-group
     = f.label :budget_id, class: 'control-label col-sm-2'
