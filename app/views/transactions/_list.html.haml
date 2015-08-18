@@ -18,7 +18,7 @@
             %i.glyphicon.glyphicon-remove
 
       .col-md-1.col-xs-2.text-right
-        = formated_currency transaction.amount
+        = formated_currency transaction.amount, unit: transaction.budget.currency
 
 - if transactions.empty?
   .text-muted= t('.no_transactions')

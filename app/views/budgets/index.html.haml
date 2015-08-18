@@ -11,12 +11,12 @@
       .col-md-8
         .progress.budget_bar
           = budgetbar(budget,true) do
-            .hidden-xs.hidden-sm= formated_currency(budget.used_this_month)
-            .visible-xs.visible-sm= "#{formated_currency(budget.used_this_month)} / #{formated_currency(budget.planned)}".html_safe
+            .hidden-xs.hidden-sm= formated_currency(budget.used_this_month, unit: budget.currency)
+            .visible-xs.visible-sm= "#{formated_currency(budget.used_this_month, unit: budget.currency)} / #{formated_currency(budget.planned, unit: budget.currency)}".html_safe
         .budget-description= budget.description
 
       .col-md-2
-        .hidden-sm.hidden-xs= formated_currency(budget.planned)
+        .hidden-sm.hidden-xs= formated_currency(budget.planned, unit: budget.currency)
 
 .row
   .col-md-10.col-md-offset-2

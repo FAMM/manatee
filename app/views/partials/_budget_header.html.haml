@@ -9,7 +9,7 @@
     .col-md-12
       .progress.budget_bar
         = budgetbar(@budget,true) do
-          =formated_currency(@budget.used_this_month)
+          =formated_currency(@budget.used_this_month, unit: @budget.currency)
 
   %ul.nav.nav-tabs.nav-justified
     =nav_tab_link_to t('budgets.show.heading_addition'), @budget

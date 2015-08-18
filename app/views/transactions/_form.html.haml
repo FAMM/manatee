@@ -10,7 +10,10 @@
   .form-group
     = f.label :amount, class: 'control-label col-sm-2'
     .col-sm-10
-      = f.number_field :amount, class: 'form-control'
+      .input-group
+        = f.number_field :amount, class: 'form-control'
+        .input-group-addon
+          =@transaction.budget.currency
 
   .form-group
     = f.label :comment, class: 'control-label col-sm-2'
@@ -32,9 +35,8 @@
     .col-sm-10
       = select( "transaction", "budget_id", @transaction.user.budgets.all.map{ |b| [ b.name, b.id ] }, {}, { class: 'form-control', @transaction.user == current_user ? nil : :disabled => 'disabled' } )
 
-
   .form-group
     .col-sm-offset-2.col-sm-10
-      = f.submit t('common.save'), class: 'btn btn-default'
-      = f.submit t('common.save_and_add'), :class => 'btn btn-default', :name => "continue" if action_name == "new"
-      = link_to "Cancel", budget_transactions_path(@budget), :class => "btn btn-warning"
+      = f.submit t('common.save'), class: 'btn btn-primary'
+      = f.submit t('common.save_and_add'), :class => 'btn btn-info', :name => "continue" if action_name == "new"
+      = link_to "Cancel", budget_transactions_path(@budget), :class => "btn btn-default"

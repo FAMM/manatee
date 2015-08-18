@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140329231412) do
+ActiveRecord::Schema.define(version: 20150818115407) do
 
   create_table "budgets", force: :cascade do |t|
     t.string   "name"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20140329231412) do
     t.datetime "updated_at"
     t.text     "description"
     t.boolean  "single_user", default: false
+    t.string   "currency",    default: "€"
   end
 
   create_table "budgets_users", force: :cascade do |t|

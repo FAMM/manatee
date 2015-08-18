@@ -11,7 +11,7 @@
               %h3
                 = link_to budget.name, budget
                 .small.pull-right
-                  = "#{formated_currency(budget.used_this_month)} / #{formated_currency(budget.planned)}".html_safe
+                  = "#{formated_currency(budget.used_this_month, unit: budget.currency)} / #{formated_currency(budget.planned, unit: budget.currency)}".html_safe
               .progress.budget_bar-slim
                 = budgetbar(budget,true)
               .budget-description.text-muted

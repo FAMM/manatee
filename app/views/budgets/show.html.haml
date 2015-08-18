@@ -16,7 +16,7 @@
           .col-md-5
             .list-group
               -@budget.categories.all.each do |category|
-                .list-group-item= category_box(category, "#{formated_currency(category.used_this_month)}".html_safe)
+                .list-group-item= category_box(category, "#{formated_currency(category.used_this_month, unit: category.budget.currency)}".html_safe)
 
   .col-md-6
     .panel.panel-default

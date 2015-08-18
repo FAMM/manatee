@@ -7,6 +7,7 @@ class Budget < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: true
   validates :description, presence: true
+  validates :currency, presence: true
   validate :valid_user_count
 
   def used_this_month

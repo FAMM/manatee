@@ -11,7 +11,7 @@
         = category_box(transaction.category,transaction.comment)
 
       .col-md-2.col-xs-3.text-right
-        = formated_currency transaction.amount
+        = formated_currency transaction.amount, unit: transaction.budget.currency
 
 - if transactions.empty?
   .text-muted= t('.no_transactions')

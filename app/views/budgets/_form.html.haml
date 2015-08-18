@@ -17,6 +17,11 @@
     .col-sm-10
       = f.text_area :description, class: 'form-control'
 
+  .form-group
+    = f.label :currency, class: 'control-label col-sm-2'
+    .col-sm-10
+      = f.text_field :currency, class: 'form-control'
+
   -unless @budget.single_user?
     .form-group
       =f.label :users, t(:manage_users), class: 'control-label col-sm-2'
