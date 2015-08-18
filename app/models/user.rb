@@ -9,7 +9,8 @@ class User < ActiveRecord::Base
 
   has_many :filters, dependent: :delete_all
 
-  validates :name, :presence => true, :uniqueness => :true
+  validates :name, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true
 
   after_create :create_user_budget
 

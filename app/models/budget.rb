@@ -5,6 +5,8 @@ class Budget < ActiveRecord::Base
 
   attr_accessor :planned, :used_this_month
 
+  validates :name, presence: true, uniqueness: true
+  validates :description, presence: true
   validate :valid_user_count
 
   def used_this_month
