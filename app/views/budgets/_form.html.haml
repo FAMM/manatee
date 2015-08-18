@@ -19,22 +19,27 @@
 
   -unless @budget.single_user?
     .form-group
-      = f.label :users, class: 'control-label col-sm-2'
+      =f.label :users, t(:manage_users), class: 'control-label col-sm-2'
       .col-sm-10
         =f.hidden_field :user_id_list
 
-        .user-badges
-          -@budget.users.each do |user|
-            %span.badge
-              = user.name
-              = link_to "javascript:void(0)", :class => "budget-user-remove-link", :data => {:user => user.id} do
-                %i.glyphicon.glyphicon-remove
+        .add-user-field.row
+          .col-sm-12
+            .input-group
+              =text_field_tag "new-budget-user-identifier", "", :placeholder => "Name or email", class: "form-control"
+              .input-group-addon#add-budget-user-button
+                %i.glyphicon.glyphicon-plus
 
-        .add-user-field
-          =text_field_tag "new_user_identifier", "", :placeholder => "Username or Email"
-          %button{:type => 'button', :class => "btn btn-default", :id => "add-budget-user-button"} Add User
+        .row
+          .budget-users.col-sm-12
+            -@budget.users.each do |user|
+              %span.budget-user.label.label-info
+                = user.name
+                = link_to "javascript:void(0)", :class => "budget-user-remove-link", :data => {:user => user.id} do
+                  %i.glyphicon.glyphicon-remove
 
   .form-group
     .col-sm-offset-2.col-sm-10
-      = f.submit t('common.save'), class: 'btn btn-default'
-      = link_to "Cancel", budget_path(@budget), :class => "btn btn-warning"
+      = f.submit t('common.save'), class: 'btn btn-primary'
+      = link_to t('common.cancel'), budget_path(@budget), class: "btn btn-default"
+      = link_to t('common.delete'), budget_path(@budget), method: "delete", class: "btn btn-danger pull-right", data: { confirm: 'Are you sure?' }

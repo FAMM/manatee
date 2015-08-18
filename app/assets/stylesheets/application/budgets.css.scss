@@ -1,6 +1,5 @@
 @import "bootstrap/variables";
 
-
 .budget-header {
   margin-bottom: 20px;
 }
@@ -16,6 +15,15 @@
       margin-top: -15px;
     }
   }
+}
+
+#add-budget-user-button {
+  cursor: pointer;
+  background-color: #5BC0DE;
+}
+
+.budget-user.label {
+  margin: 0.5em 0.5em 0.5em 0em;
 }
 
 .progress.budget_bar {
