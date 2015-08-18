@@ -6,7 +6,7 @@ class Category < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: { scope: :budget }
   validates :planned, presence: true, numericality: true
-  validates :color, presence: true, format: { with: /^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/, message: "must be a valid hexadecimal color code starting with #" }
+  validates :color, presence: true, format: { with: /\A#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})\Z/, message: "must be a valid hexadecimal color code starting with #" }
   validates :budget_id, presence: true, numericality: :only_integer
 
 	attr_accessor :budget_used, :budget_used_by_date
