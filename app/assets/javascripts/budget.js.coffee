@@ -36,7 +36,7 @@ $(document).on 'click', '#add-budget-user-button', (event) ->
 
   if identifier is null then show_error_message("You have to enter a name or an email adress"); return
 
-  $.getJSON("/users/by_identifier/"+identifier)
+  $.getJSON("/users/by_identifier/" + identifier)
     .success (user) ->
       if user is null
         show_error_message("Cannot find user")

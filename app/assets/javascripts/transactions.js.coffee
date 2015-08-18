@@ -6,7 +6,7 @@
 $(document).on 'click', '.transaction-remove-link', (event) ->
   id=$(this).attr("data-id")
   budget=$(this).attr("data-budget")
-  $.ajax "/budgets/"+budget+"/transactions/"+id,{
+  $.ajax "/budgets/" + budget + "/transactions/" + id,{
     cache:false
     ,dataType: "json"
     ,type: 'DELETE'

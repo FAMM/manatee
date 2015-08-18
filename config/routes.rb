@@ -17,7 +17,7 @@ Manatee::Application.routes.draw do
     resources :categories
   end
 
-  get 'users/by_identifier/:identifier', :to => 'users#by_identifier'
+  get 'users/by_identifier/:identifier', :to => 'users#by_identifier', constraints: { identifier: /[^\/]+/ }
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'
