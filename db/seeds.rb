@@ -45,7 +45,7 @@ admin.budgets.each do |budget|
         :amount => 10,
         :comment => "Foo Bar",
         :date => Date.today,
-        :category => categories.first,
+        :category => categories[0],
         :user => admin
     },
     {
@@ -59,7 +59,7 @@ admin.budgets.each do |budget|
         :amount => 486,
         :comment => "unexpected costs",
         :date => Date.today,
-        :category => categories.last,
+        :category => categories[2],
         :user => admin
     }
   ])
@@ -72,7 +72,7 @@ user.budgets.each do |budget|
         :amount => 48,
         :comment => "Foo Bar",
         :date => Date.today,
-        :category => categories.first,
+        :category => categories[0],
         :user => user
     },
     {
@@ -85,7 +85,7 @@ user.budgets.each do |budget|
     {
         :amount => 5,
         :date => Date.today,
-        :category => categories.last,
+        :category => categories[2],
         :user => user
     }
   ])
