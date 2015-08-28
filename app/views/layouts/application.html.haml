@@ -4,7 +4,7 @@
     %meta{:charset => "utf-8"}
     %meta{:name => "viewport", :content=> "width=device-width, initial-scale=1.0"}
 
-    %title 
+    %title
       - if @title
         = @title
         |
@@ -21,7 +21,7 @@
     #wrap
       %div= render :partial => "layouts/navbar"
 
-      .container.main-container
+      .container.main-container{style: "margin-bottom: 30px;"}
         .main-content
           .row
             .col-md-12#flash-container
@@ -54,5 +54,3 @@
     %footer
       .container
         =render :partial => "layouts/footer"
-
-
