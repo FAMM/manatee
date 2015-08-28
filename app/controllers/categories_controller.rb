@@ -2,7 +2,8 @@ class CategoriesController < ApplicationController
 
   before_filter :authenticate_user!
   before_action :set_budget
-  before_action :set_category, only: [:edit, :update, :destroy]
+  before_action :set_category, only: [:destroy, :update]
+
 
   # GET /transactions
   # GET /transactions.json
@@ -10,60 +11,42 @@ class CategoriesController < ApplicationController
     @categories = @budget.categories
   end
 
-  # GET /transactions/new
-  def new
-    @transaction = current_user.transactions.new
-    @transaction.budget = @budget
-  end
 
-  # GET /transactions/1/edit
-  def edit
-  end
 
-  # POST /transactions
-  # POST /transactions.json
   def create
-    @transaction = current_user.transactions.new(transaction_params)
-    @transaction.budget=@budget
+    @category = @budget.categories.new(category_params)
 
     respond_to do |format|
-      if @transaction.save
-        redirect_path = params[:continue] ? new_budget_transaction_url(@budget) : budget_transactions_url(@budget)
+      if @category.save
+        budget_categories_url(@budget)
 
-        format.html { redirect_to redirect_path, notice: 'Transaction was successfully created.' }
-        format.json { render :json => @transaction, status: :created, location: @transaction }
+        format.html { redirect_to budget_categories_url(@budget), notice: 'Category was successfully created.' }
+        format.json { render :json => @category, status: :created, location: @category }
       else
-        format.html { render action: 'new' }
-        format.json { render json: @transaction.errors, status: :unprocessable_entity }
+        format.html { render action: 'index', alert: "Could not create Category: #{@category.errors.full_messags.join("and")}" }
+        format.json { render json: @category.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /transactions/1
-  # PATCH/PUT /transactions/1.json
   def update
     respond_to do |format|
-      if @transaction.update(transaction_params)
-        format.html { redirect_to budget_transactions_url(@budget), notice: 'Transaction was successfully updated.' }
-        format.json { render :json => @transaction }
+      if @category.update(category_params)
+        format.json { render :json => @category }
       else
-        format.html { render action: 'edit' }
         format.json { render json: @transaction.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /transactions/1
-  # DELETE /transactions/1.json
   def destroy
-    if current_user == @transaction.user || current_user.admin?
-      @transaction.destroy
+    if current_user.in?(@category.budget.users) || current_user.admin?
+      @category.destroy
       respond_to do |format|
         format.json { head :no_content }
       end
     else
       respond_to do |format|
-        format.html { redirect_to @transaction, :alert => t("errors.messages.not_allowed") }
         format.json { render :json => t("errors.messages.not_allowed"), :status => :forbidden }
       end
     end
@@ -74,12 +57,12 @@ class CategoriesController < ApplicationController
     @budget = current_user.budgets.find(params[:budget_id])
   end
 
-  def set_catgory
+  def set_category
     @category = @budget.categories.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
-  def transaction_params
-    params.require(:transaction).permit(:amount, :comment, :category_id, :budget_id, :date )
+  def category_params
+    params.require(:category).permit(:name, :planned)
   end
 end

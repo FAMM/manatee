@@ -25,9 +25,23 @@
       .panel-body
         %canvas#monthly-trend{width:500, height: 300}
 
+.row
+  .col-md-6
+    .panel.panel-default
+      .panel-heading
+        %h3.panel-title User distribution
+      .panel-body
+        .row
+          .col-md-7
+            %canvas#user-distribution{width: '300', height: '300'}
+          .col-md-5
+            .list-group
+              -@budget.users.each_with_index do |user,i|
+                .list-group-item= box(@statistics.get_color(i),user.name,user.name)
 
 
 
 :javascript
   responsive_chart('Doughnut','#category-distribution',#{@statistics.category_distribution.to_json})
   responsive_chart('Line','#monthly-trend',#{@statistics.monthly_trend.to_json})
+  responsive_chart('Doughnut','#user-distribution',#{@statistics.user_distribution.to_json})

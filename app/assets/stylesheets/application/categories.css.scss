@@ -2,7 +2,26 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import "bootstrap/variables";
+
 .category_box {
   border-radius: 0px;
   margin-right: 10px;
+}
+
+.category-list {
+  margin: 20px 15px 20px 15px;
+
+  .category {
+    padding-top:5px;
+    padding-bottom: 10px;
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-top-color: $table-border-color;
+
+  }
+
+  .category:nth-child(2n-1) {
+    background-color: $table-bg-accent;
+  }
 }

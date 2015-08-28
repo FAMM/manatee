@@ -1,25 +1,42 @@
 =render :partial => "partials/budget_header", :locals => {:action => "Categories"}
 
-%table.table
-  %tr
-    %th= t('activerecord.models.category')
-    %th.currency= t('common.planned')
-    %th.currency= t('common.used')
-    %th &nbsp;
-  - @categories.each do |category|
-    %tr
-      %td= category.name
-      %td.currency= number_to_currency category.budget
-      %td.currency= number_to_currency category.used_this_month
-      %td
-        .pull-right.inline-buttons
-          = button_to t('common.edit'), edit_category_path(category), method: :get, class: 'btn'
-          = button_to t('common.delete'), category, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }
+.row
+  .col-md-6
+    .category-list
+      -@categories.each do |category|
+        .row.category.with-options
+          .col-md-5
+            = category_box(category,category.name)
 
-  %tr.info
-    %td= t('common.sum')
-    %td.currency= number_to_currency @sum_budget
-    %td.currency= number_to_currency @sum_budget_used
-    %td &nbsp;
+          .col-md-5
+            = formated_currency(category.used_this_month)
+            ="/"
+            = formated_currency(category.planned)
 
-%p= link_to t('common.new', entity: t('activerecord.models.category')), new_category_path
+          .col-md-2.text-right
+            %span.options.hidden
+              =link_to "javascript:void(0)" , :class => "category-edit-link", :data => { :id => category.id, :budget => category.budget.id, :name => category.name, :planned => category.planned} do
+                %i.glyphicon.glyphicon-pencil
+              =link_to "javascript:void(0)", :class => "category-remove-link", :data => { :id => category.id, :budget => category.budget.id } do
+                %i.glyphicon.glyphicon-remove
+
+    =form_for [@budget,@budget.categories.build], html: {class: "form-inline"} do |f|
+      .form-group
+        =f.text_field :name, class: "form-control", placeholder: "Name"
+      .form-group
+        =f.number_field :planned, min: 0, class: "form-control", placeholder: "Planned"
+      =f.submit "Add", class: "btn btn-default"
+
+  .col-md-6#category-edit{style: "display:none;"}
+    %h3 Edit Category
+    %form#category-edit-form
+      =hidden_field_tag :budget_id
+      =hidden_field_tag :category_id
+      .form-group
+        =label_tag :name
+        =text_field_tag :name, "Name", class: "form-control"
+      .form-group
+        =label_tag :planned
+        =number_field_tag :planned, 1234, class: "form-control"
+      %a#category-save-edit.btn.btn-default{href: "javascript:void(0);"}
+        Save

@@ -30,3 +30,44 @@ window.show_error_message= (text) ->
       from: 'bottom',
       amount: 60
   })
+
+window.remove_element = (url) ->
+  $.ajax url,{
+    cache:false
+    ,dataType: "json"
+    ,type: 'DELETE'
+    ,success: (result) ->
+      window.location.reload(true)
+    ,error: (result) ->
+      console.log result
+      $.bootstrapGrowl(result.responseText, {
+        type: 'danger',
+        ele: ".main-content"
+        delay: 4000,
+        align: 'center',
+        offset:
+          from: 'bottom',
+          amount: 60
+      })
+  }
+
+window.update_element = (url, data) ->
+  $.ajax url,{
+    cache:false
+    ,dataType: "json"
+    ,type: 'PUT'
+    ,data: data
+    ,success: (result) ->
+      window.location.reload(true)
+    ,error: (result) ->
+      console.log("foobar")
+      $.bootstrapGrowl(result.responseText, {
+        type: 'danger',
+        ele: ".main-content"
+        delay: 4000,
+        align: 'center',
+        offset:
+          from: 'bottom',
+          amount: 60
+      })
+  }
