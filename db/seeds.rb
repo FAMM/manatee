@@ -1,5 +1,5 @@
 # Create 2 Users, on is an admin the other one a user (automatically creates user budgets)
-admin,user = User.create(
+admin,user = User.create!(
 	[
 		{
 			name: 'admin',
@@ -21,16 +21,17 @@ admin,user = User.create(
 
 
 # Create another budget that is shared between both users
-Budget.create(
+Budget.create!(
     :name => "Shared Budget",
     :description => "This is a shared Budget between admin and user",
-    :users => User.all
+    :users => User.all,
+		:creator => admin
 )
 
 # Create 3 categories for every budget
 Budget.all.each do |budget|
   3.times do |i|
-    budget.categories.create(
+    budget.categories.create!(
         :name => "Category #{i+1}",
         :planned => (i+1)*100
     )
@@ -40,7 +41,7 @@ end
 #Add some transactions
 admin.budgets.each do |budget|
   categories = budget.categories
-  budget.transactions.create([
+  budget.transactions.create!([
     {
         :amount => 10,
         :comment => "Foo Bar",
@@ -67,7 +68,7 @@ end
 
 user.budgets.each do |budget|
   categories = budget.categories
-  budget.transactions.create([
+  budget.transactions.create!([
     {
         :amount => 48,
         :comment => "Foo Bar",
@@ -84,11 +85,10 @@ user.budgets.each do |budget|
     },
     {
         :amount => 5,
+				:comment => "Bar Baz",
         :date => Date.today,
         :category => categories[2],
         :user => user
     }
   ])
 end
-
-

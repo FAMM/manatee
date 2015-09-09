@@ -2,7 +2,7 @@ class BudgetsController < ApplicationController
 
   before_filter :authenticate_user!
   before_action :set_budget, only: [:edit, :update, :destroy]
-  
+
   def index
     @budgets = current_user.budgets.includes(:categories).includes(:transactions)
   end
@@ -13,8 +13,7 @@ class BudgetsController < ApplicationController
   end
 
   def new
-    @budget = current_user.budgets.new
-    # rails does not represent the connection between budget and current_user on its own, so lets do it manually
+    @budget = current_user.budgets.build
     @budget.users << current_user
   end
 
@@ -23,6 +22,7 @@ class BudgetsController < ApplicationController
 
   def create
     @budget = current_user.budgets.new(budget_params)
+    @budget.creator = current_user
 
     respond_to do |format|
       if @budget.save
@@ -46,9 +46,10 @@ class BudgetsController < ApplicationController
   # DELETE /budgets/1
   # DELETE /budgets/1.json
   def destroy
-    if @budget.single_user?
+    if @budget.single_user? || !current_user==@budget.creator
+      message = budget.single_user? 'You cannot delete your personal budget.':'You are not allowed to remove this budget.'
       respond_to do |format|
-        format.html { redirect_to @budget, alert: 'You cannot delete your personal budget.'}
+        format.html { redirect_to @budget, alert: message}
         format.json { head :not_allowed }
       end
     else
@@ -71,4 +72,3 @@ class BudgetsController < ApplicationController
     params.require(:budget).permit(:name, :description, :currency, :user_id_list)
   end
 end
-

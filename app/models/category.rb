@@ -1,4 +1,6 @@
 class Category < ActiveRecord::Base
+	include HasUniqueColor
+
 	belongs_to :budget
 	has_many :transactions, dependent: :destroy
 

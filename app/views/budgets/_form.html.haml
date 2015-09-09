@@ -40,8 +40,9 @@
             -@budget.users.each do |user|
               %span.budget-user.label.label-info
                 = user.name
-                = link_to "javascript:void(0)", :class => "budget-user-remove-link", :data => {:user => user.id} do
-                  %i.glyphicon.glyphicon-remove
+                - if !user==current_user || (@budget.persisted? && !@budget.creator.in?([current_user,user]))
+                  = link_to "javascript:void(0)", :class => "budget-user-remove-link", :data => {:user => user.id} do
+                    %i.glyphicon.glyphicon-remove
 
   .form-group
     .col-sm-offset-2.col-sm-10
@@ -50,5 +51,5 @@
         = link_to t('common.cancel'), budgets_path, class: "btn btn-default"
       -else
         = link_to t('common.cancel'), budget_path(@budget), class: "btn btn-default"
-        -unless @budget.single_user?
+        -unless @budget.single_user? || current_user = @budget.creator
           = link_to t('common.delete'), budget_path(@budget), method: "delete", class: "btn btn-danger pull-right", data: { confirm: 'Are you sure?' }

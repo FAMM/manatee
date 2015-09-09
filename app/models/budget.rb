@@ -1,5 +1,6 @@
 class Budget < ActiveRecord::Base
   has_and_belongs_to_many :users
+  belongs_to :creator, class_name: 'User', foreign_key: :creator_id
   has_many :categories, :dependent => :destroy
   has_many :transactions
 
@@ -8,26 +9,16 @@ class Budget < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
   validates :description, presence: true
   validates :currency, presence: true
+  validates :creator_id, presence: true
   validate :valid_user_count
+  validate :validate_creator_is_member
 
   def used_this_month
-    used = 0.0
-
-		self.categories.each do |category|
-			used += category.used_this_month
-		end
-		
-		used
+		self.categories.map(&:used_this_month).inject(&:+)
   end
 
   def planned
-    planned = 0.0
-
-		self.categories.each do |category|
-			planned += category.planned
-		end
-		
-		planned
+		self.categories.sum(:planned)
   end
 
   def saldo
@@ -53,5 +44,9 @@ class Budget < ActiveRecord::Base
     end
     false
   end
-end
 
+  def validate_creator_is_member
+    return false unless creator
+    errors.add(:base, :creator_must_be_a_member) unless creator.in?(users)
+  end
+end

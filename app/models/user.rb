@@ -40,7 +40,8 @@ class User < ActiveRecord::Base
 			:name => self.name.capitalize,
 			:description => "Budget for #{self.name}",
       :single_user => true,
-      :users => [self]
+      :users => [self],
+      :creator => self
 		)
   end
 end
