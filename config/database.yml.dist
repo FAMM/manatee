@@ -1,0 +1,13 @@
+development:
+  adapter: mysql2
+  database: manatee_dev
+  username: root
+  host: localhost
+  timeout: 5000
+
+test:
+  adapter: mysql2
+  database: manatee_test
+  username: root
+  host: localhost
+  timeout: 5000
